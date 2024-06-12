@@ -1,0 +1,50 @@
+body{
+    background: linear-gradient(to bottom, #841c1c, #ec5c5c);
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+  }
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+h2 {
+    text-align: center;
+    padding-bottom: 10px;
+}
+#participants-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+#participants-table th,
+#participants-table td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+#participants-table th {
+    background-color: #f2f2f2;
+}
+#add-row-btn,
+#submit-btn {
+    display: block;
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #0056b3;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#add-row-btn:hover,
+#submit-btn:hover {
+    background-color: #DF3131;
+}

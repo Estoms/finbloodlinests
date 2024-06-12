@@ -1,0 +1,117 @@
+body {
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0;
+  margin-top: 230px;
+  margin-left: 18px;
+  height: auto;
+  padding: 10px;
+  width: 90%;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #df3131;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: black;
+  font-weight: bold;
+  margin-left: 14px;
+  text-align: left;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+textarea {
+  width: 90%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+.confirmation-heading {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.confirmation-heading h2 {
+  font-size: 24px;
+  color: black;
+  font-weight: bold;
+}
+textarea {
+  resize: vertical;
+}
+
+input[type="submit"] {
+  background-color: #df3131;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  margin-top: 10px;
+  width: 90%;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+  margin-bottom: -185px;
+  position: sticky;
+  top: 0;
+  padding: 3px;
+  margin-left: 3px;
+}
+
+#search-form {
+  position: absolute;
+  top: 10px;
+  right: 50px;
+  display: flex; /* Utiliser la disposition flex */
+  align-items: center; /* Aligner les éléments verticalement */
+
+  z-index: 999;
+}
+
+#search-input {
+  margin-right: 10px; /* Ajouter un espace entre le champ et le bouton */
+}
+#search-form button {
+  background-color: #df3131; /* Couleur de fond */
+  color: white; /* Couleur du texte */
+  padding: 8px 15px; /* Rembourrage intérieur */
+  border: none; /* Pas de bord */
+  border-radius: 5px; /* Coins arrondis */
+  cursor: pointer; /* Curseur pointeur au survol */
+  transition: background-color 0.3s ease; /* Transition en douceur */
+}
+
+#search-form button:hover {
+  background-color: #b72323; /* Couleur de fond au survol */
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+}

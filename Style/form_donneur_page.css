@@ -1,0 +1,74 @@
+/* Ajoutez vos styles personnalisés ici */
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: transparent;
+    width: 100%;
+    padding: 20px 0;
+}
+
+.header img {
+    width: 75px;
+    margin-bottom: 10px;
+}
+
+.header h2 {
+    margin: 0;
+}
+
+form {
+    margin-top: calc(95px + 55px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.form-column {
+    flex-basis: calc(50% - 10px);
+}
+
+label {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+input,
+select,
+button {
+    width: 100%;
+    padding: 6px; /* Réduire le rembourrage des champs */
+    font-size: 14px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #DF3131; /* Nouvelle couleur */
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #b72323;
+}
