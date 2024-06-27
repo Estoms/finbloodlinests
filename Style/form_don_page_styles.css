@@ -22,8 +22,6 @@ body{
   align-items: center;
   box-sizing: border-box;
   background: transparent;
-  position: fixed;
-  
 }
 .navbar {
   justify-content: center;
@@ -92,6 +90,20 @@ body{
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
+.submit {
+    
+    padding: 4px;
+    color: #fff;
+    background: linear-gradient(to bottom, #841c1c, #ec5c5c);
+    margin: 0;
+    font-weight: bold;
+
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
 .div button:hover {
     background-color: #1180f7;
@@ -100,10 +112,9 @@ body{
 
 
 .principale {
-    margin-top: 45px;
     max-width: 1000px;
     height: auto;
-    margin: 100px auto 10px auto; 
+    margin: 0px auto 10px auto; 
     padding: 20px;
     background-color: #fff;
     border-radius: 5px;

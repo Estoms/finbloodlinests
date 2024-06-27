@@ -47,7 +47,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
         $_SESSION['premiere_connexion'] = true;
 
         // Redirection avec JavaScript
-       echo '<script>window.location.href = "dashboard.php";</script>';
+       echo '<script>window.location.href = "index.php";</script>';
         //header("location:creationEvenement.php");
         exit();
     } else {
@@ -68,7 +68,8 @@ mysqli_close($conn);
 
   <style>
     body {
-      background-color: #DF3131;
+      background-color: #841c1c;
+      
       display: flex;
       justify-content: center;
       align-items: center;

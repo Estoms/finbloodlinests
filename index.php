@@ -30,10 +30,11 @@ if (!$conn) {
 // Vérifier si c'est la première connexion de l'utilisateur
 if (isset($_SESSION['premiere_connexion'])) {
     // Requête de mise à jour de la colonne isActive pour les événements passés
-    $sqlUpdate = "UPDATE evenement SET isActive = 0 WHERE dateEvenement < CURDATE()";
+    $sqlUpdate = "UPDATE evenement SET isActive = 0 WHERE dateEvenement < CURDATE() - INTERVAL 1 DAY";
     if (!mysqli_query($conn, $sqlUpdate)) {
         die("Erreur lors de la mise à jour des événements passés : " . mysqli_error($conn));
     }
+
 
     // Détruire la variable de session pour éviter de répéter la mise à jour à chaque chargement de page
     unset($_SESSION['premiere_connexion']);

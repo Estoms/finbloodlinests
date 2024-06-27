@@ -92,6 +92,37 @@ CREATE TABLE `donneur` (
   PRIMARY KEY (`idDonneur`)
 )
 
+
+-- Créez un déclencheur BEFORE INSERT
+DELIMITER //
+CREATE TRIGGER before_insert_donneur
+BEFORE INSERT ON donneur
+FOR EACH ROW
+BEGIN
+    IF NEW.numCarteDon IS NOT NULL THEN
+        IF EXISTS (SELECT 1 FROM donneur WHERE numCarteDon = NEW.numCarteDon AND idDonneur <> NEW.idDonneur) THEN
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Une valeur non nulle en conflit pour numCarteDon';
+        END IF;
+    END IF;
+END//
+DELIMITER ;
+
+-- Créez un déclencheur BEFORE UPDATE
+DELIMITER //
+CREATE TRIGGER before_update_donneur
+BEFORE UPDATE ON donneur
+FOR EACH ROW
+BEGIN
+    IF NEW.numCarteDon IS NOT NULL THEN
+        IF EXISTS (SELECT 1 FROM donneur WHERE numCarteDon = NEW.numCarteDon AND idDonneur <> NEW.idDonneur) THEN
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Une valeur non nulle en conflit pour numCarteDon';
+        END IF;
+    END IF;
+END//
+DELIMITER ;
+
+
+
 CREATE TABLE IF NOT EXISTS `participation` (
   `idParticipation` int NOT NULL,
   `participantNom` varchar(255)  DEFAULT NULL,
@@ -318,3 +349,37 @@ INSERT INTO questions (idQuestion, question_text, response_type) VALUES
 ('autres_infos', 'Autres informations', 'textarea'),
 ('preleveur', 'Préleveur', 'text');
 
+
+ // Création d'une nouvelle connexion
+    $conn = mysqli_connect($servername, $username, $passwordDB, $dbname);
+
+    $servername = "localhost";
+    $username = "id20719702_gestiondon_1";
+    $password = "Ea42380@gmail.com";
+    $dbname = "id20719702_gestiondon";
+
+
+
+all_evenement.page.php
+connexion.php
+connexionOrganisme.php
+dashboard.php
+essaie.php
+form_don_page.php
+form_donneur_page.php
+form_participant_page.php
+form_predon_page.php
+formulaire_evenement.page.php
+info_event.php
+session.php
+styles.css
+traitement_donneur_reponse.php
+
+
+
+all_evenement.page.css
+form_don_page_styles.css
+form_donneur_page.css
+form_participant_page.css
+forms_event_page.css
+styles.css

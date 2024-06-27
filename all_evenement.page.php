@@ -71,10 +71,11 @@ if (!$resultEvenements) {
     <strong><h2>Liste des évènements</h2></strong>
     </div>
 
-    <div class="menu">
-        <ul>
+    <div class="menu" >
+        <ul style="color: white;
+            font-size: 1.2rem;">
             <li><a href="formulaire_evenement.page.php">Créer évènement</a></li>
-            <li><a href="dashboard.php">Retour</a></li>
+            <li><a href="javascript:history.go(-1);">Retour</a></li>
         </ul>
     </div>
 
@@ -118,7 +119,8 @@ if (!$resultEvenements) {
 
                 echo "<td>";
                 echo "<div class='lien'>";
-                echo "<a href='info_event.php?id=".$evenement['idEvenement']."'><button>Voir plus</button></a>";
+                echo "<a href='info_event.php?id=".$evenement['idEvenement']."'><button>!</button></a>";
+                echo "<a href='gestE_S.php?id=".$evenement['idEvenement']."'><button><strong>PF</strong></button></a>";
                 echo "<a href='form_don_page.php?id=".$evenement['idEvenement']."'><button><strong>></strong></button></a>";
                 echo "</div>";
                 echo "</td>";
