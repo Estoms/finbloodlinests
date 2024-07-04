@@ -58,7 +58,7 @@ if (!$resultEvenements) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Liste des évènements</title>
+    <title>Agenda des Evénements</title>
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link rel="stylesheet" href=".\Style\all_evenement.page.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -68,7 +68,7 @@ if (!$resultEvenements) {
     
 
     <div class="dashboard-heading">
-    <strong><h2>Liste des évènements</h2></strong>
+    <strong><h2>Agenda des Evénements</h2></strong>
     </div>
 
     <div class="menu" >

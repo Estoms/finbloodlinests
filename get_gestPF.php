@@ -1,10 +1,11 @@
 <?php
 // Inclusion du fichier de connexion à la base de données
 include("connexion.php");
- 
-//insertion dans la base de données suivant le formulaire
 // Initialisation de la variable pour le message JavaScript
 $message = "";
+// Variable pour stocker l'URL de redirection
+$redirect_url = "gestE_S.php"; 
+
 // Vérification si le formulaire de Sorties est soumis
 if (isset($_POST['sendSorties'])) {
     // Récupération des valeurs du formulaire de Sorties
@@ -19,6 +20,9 @@ if (isset($_POST['sendSorties'])) {
     // Exécution de la requête d'insertion pour Sorties
     if (mysqli_query($conn, $sql_sorties)) {
         $message = "Sorties enregistrées avec succès.";
+        // Redirection avec JavaScript après l'alerte
+        echo "<script>alert('$message'); window.location.href='$redirect_url?id=$idEvenement';</script>";
+        exit; // Arrête l'exécution du script après la redirection
     } else {
         $message = "Erreur lors de l'enregistrement des Sorties : " . mysqli_error($conn);
     }
@@ -39,10 +43,14 @@ if (isset($_POST['sendRetour'])) {
     // Exécution de la requête d'insertion pour Retour
     if (mysqli_query($conn, $sql_retour)) {
         $message = "Retour enregistré avec succès.";
+        // Redirection avec JavaScript après l'alerte
+        echo "<script>alert('$message'); window.location.href='$redirect_url?id=$idEvenement';</script>";
+        exit; // Arrête l'exécution du script après la redirection
     } else {
         $message = "Erreur lors de l'enregistrement du Retour : " . mysqli_error($conn);
     }
 }
+
 // Fermeture de la connexion à la base de données
 mysqli_close($conn);
 ?>
