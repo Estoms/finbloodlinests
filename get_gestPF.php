@@ -35,7 +35,7 @@ if (isset($_POST['sendRetour'])) {
     // Formatage de la chaîne pour Retour
     $retour = "Collation[Boisson($retour_boissons)|Biscuits($retour_biscuits)]Usager[$retour_usager]";
     // Requête SQL d'insertion pour Retour
-    $sql_retour = "INSERT INTO gestPF (Retour, idEvenement) VALUES ('$retour', '$idEvenement')";
+    $sql_retour = "UPDATE gestpf SET Retour ='$retour' WHERE idEvenement='$idEvenement'";
     // Exécution de la requête d'insertion pour Retour
     if (mysqli_query($conn, $sql_retour)) {
         $message = "Retour enregistré avec succès.";
@@ -45,29 +45,4 @@ if (isset($_POST['sendRetour'])) {
 }
 // Fermeture de la connexion à la base de données
 mysqli_close($conn);
-
-
-
-
-include("connexion.php");
-$idEvenement = $_GET['id'];
-// Préparer et exécuter la requête pour récupérer les données
-$sql = "SELECT * FROM gestPF WHERE idEvenement = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $idEvenement);
-$stmt->execute();
-$result = $stmt->get_result();
-
-// Vérifier si des données ont été trouvées
-$data = [];
-if ($result->num_rows > 0) {
-    $data = $result->fetch_assoc();
-}
-// Renvoyer les données au format JSON
-echo json_encode($data);
-
-// Fermeture de la connexion à la base de données
-mysqli_close($conn);
-
-
 ?>
