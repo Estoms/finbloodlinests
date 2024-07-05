@@ -94,6 +94,10 @@ mysqli_close($conn);
                         <td><?php echo $lieu['lieu']; ?></td>
                     </tr>
                 </table>
+
+                
+
+
             </div>
         </div>
     </section>
@@ -125,7 +129,7 @@ mysqli_close($conn);
                         echo "<td>".$donneur['sexe']."</td>";
                         echo "<td>".$donneur['telPersoDonneur']."</td>";
                         echo "<td>".$donneur['professionDonneur']."</td>";
-                        echo "<td class='center-content'><a href='info_event.php?id=".$donneur['idDonneur']."' class='no-style'>!</a></td>";
+                        echo "<td class='center-content'><a href='infos_donneurdon.php?id_donneur=".$donneur['idDonneur']."&id=".$idEvenement."'class='no-style'>!</a></td>";
                         echo "</tr>";
                     }
                     ?>

@@ -74,7 +74,6 @@ $questions_map = [
     'preleveur' => 'Préleveur',
 ];
 
-// Exemples de récupération des données du formulaire et insertion dans la base de données
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
    
      // Coordonnées de la base de données
@@ -102,15 +101,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             echo "Erreur: " . $sql . "<br>" . $conn->error . "<br>";
         }
+    }
+    // Fermer la connexion
+    $conn->close();
+ 
          // Détruire la variable de session idDonneur
         unset($_SESSION['idDonneur']);
     
         // Rediriger vers form_don_page.php
         header("Location: form_don_page.php?id=$idEvenement");
         exit();
-    }
-
-    // Fermer la connexion
-    $conn->close();
 }
 ?>

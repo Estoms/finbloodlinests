@@ -385,5 +385,16 @@
         <button type="submit" name="btn_quest">Envoyer</button>
     </div>
     </form>
+
+    <script>
+    function setDateTimeDefaults() {
+        const now = new Date();
+        const formattedDateTime = now.toISOString().slice(0, 16); // Format YYYY-MM-DDTHH:MM
+        document.getElementById('debut').value = formattedDateTime;
+        document.getElementById('fin').value = formattedDateTime;
+    }
+
+    window.onload = setDateTimeDefaults;
+</script>
 </body>
 </html>

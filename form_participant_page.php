@@ -38,7 +38,6 @@
         <button id="add-row-btn">Ajouter un participant</button>
         <button id="submit-btn">Soumettre</button>
     </div>
-    
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         const addRowBtn = document.getElementById("add-row-btn");
@@ -133,6 +132,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     exit("success");
 }
 ?>
-
 </body>
 </html>
