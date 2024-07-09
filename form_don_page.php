@@ -40,13 +40,27 @@ if ($resultLieu && mysqli_num_rows($resultLieu) > 0) {
 }
 
 // Récupérer les infos sur les donneurs
-$sqldonneur = "SELECT * FROM donneur INNER JOIN participationdonneur ON donneur.idDonneur = participationdonneur.idDonneur WHERE participationdonneur.idEvenement = '$idEvenement' GROUP BY participationdonneur.idDonneur;";
+$sqldonneur = "SELECT donneur.*
+FROM donneur
+INNER JOIN participationdonneur ON donneur.idDonneur = participationdonneur.idDonneur
+WHERE participationdonneur.idEvenement = '$idEvenement'
+GROUP BY donneur.idDonneur;
+";
 $result_donneur = mysqli_query($conn,$sqldonneur) ;
 if (!$result_donneur) {
     die("Erreur lors de l'exécution de la requête : " . mysqli_error($conn));
 }
 
-
+$sql_nb_donneur = "SELECT COUNT(DISTINCT donneur.idDonneur) as nb_donneur
+FROM donneur
+INNER JOIN participationdonneur ON donneur.idDonneur = participationdonneur.idDonneur
+WHERE participationdonneur.idEvenement = '$idEvenement';
+"; 
+$result_nb_donneur = mysqli_query($conn,$sql_nb_donneur) ;
+$nb_donneur = mysqli_fetch_assoc($result_nb_donneur);
+if (!$result_nb_donneur) {
+    die("Erreur lors de l'exécution de la requête : " . mysqli_error($conn));
+}
 
 mysqli_close($conn);
 ?>
@@ -66,7 +80,7 @@ mysqli_close($conn);
 <body>
 <div class="container">
     <header class="header" id="header">
-        <a href="#" class="logo"></a>
+        <a href="index.php" class="logo">STS/DDS-ATL.</a>
         <div id="menu-icon"><span class="animate" style="--i:2;"></span></div>
         <nav class="navbar">
             <a class="active" href="#"></a>
@@ -105,7 +119,10 @@ mysqli_close($conn);
     <div class="composition">
         <div class="dashboard-content">
             <div class="ent">
-                <div><h3>Dons</h3></div>
+                <div>
+                    <h3><Strong>Dons :</Strong> <?php echo $nb_donneur['nb_donneur']; ?> donneurs</h3>
+                    
+                </div>
                 <div class="div">
                     <a href="form_donneur_page.php">
                         <button>+ Nouveau don</button>

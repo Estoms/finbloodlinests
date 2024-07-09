@@ -101,7 +101,7 @@ if ($gestPF) {
 <body>
 <div class="container">
     <header class="header" id="header">
-        <a href="#" class="logo"></a>
+        <a href="index.php" class="logo">STS/DDS-ATL.</a>
         <div id="menu-icon"><span class="animate" style="--i:2;"></span></div>
         <nav class="navbar">
             <a class="active" href="#"></a>

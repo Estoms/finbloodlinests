@@ -60,10 +60,9 @@ if (!$resultEvenements) {
 <head>
     <title>Agenda des Evénements</title>
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href=".\Style\all_evenement.page.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-</head>
-<body style="background-color: #DF3131;">
+    <link rel="stylesheet" href=".\Style\allEvenement__page.css" />
+    </head>
+<body>
 <div class="container">
     
 
@@ -72,8 +71,7 @@ if (!$resultEvenements) {
     </div>
 
     <div class="menu" >
-        <ul style="color: white;
-            font-size: 1.2rem;">
+        <ul>
             <li><a href="formulaire_evenement.page.php">Créer évènement</a></li>
             <li><a href="javascript:history.go(-1);">Retour</a></li>
         </ul>

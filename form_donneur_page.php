@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $telContactUrgence = mysqli_real_escape_string($conn, $telContactUrgence);
 
         // Rechercher si le donneur existe déjà
-        $query = "SELECT idDonneur FROM donneur WHERE numCarteDon='$numCarteDon' OR (nomDonneur='$nomDonneur' AND prenomDonneur='$prenomDonneur' AND sexe='$sexe' AND naissDonneur='$naissDonneur')";
+        $query = "SELECT idDonneur FROM donneur WHERE numCarteDon='$numCarteDon' and (nomDonneur='$nomDonneur' AND prenomDonneur='$prenomDonneur' AND sexe='$sexe' AND naissDonneur='$naissDonneur') or (nomDonneur='$nomDonneur' AND prenomDonneur='$prenomDonneur' AND sexe='$sexe' AND naissDonneur='$naissDonneur')";
         $result = mysqli_query($conn, $query);
 
         if (mysqli_num_rows($result) > 0) {
