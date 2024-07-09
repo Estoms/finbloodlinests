@@ -27,7 +27,7 @@
                     <th>Email</th>
                     <th>Mot de Passe</th>
                     <th>Badge</th>
-                    <th>Action</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>

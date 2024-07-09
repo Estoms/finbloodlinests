@@ -110,14 +110,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire Donneur</title>
- 
+
     <link rel="stylesheet" href=".\Style\form_donneur_page.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
+
 <body style="background-color: #DF3131;">
     <div class="container">
         <div class="header">
@@ -126,91 +128,126 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <form id="myForm" method="post" action="form_donneur_page.php">
 
-        <div class="form-column">
-            <label for="numCarteDon">Numéro de la carte de donneur:</label>
-            <input type="text" id="numCarteDon" name="numCarteDon">
+            <div class="form-column">
+                <label for="numCarteDon">Numéro de la carte de donneur:</label>
+                <input type="text" id="numCarteDon" name="numCarteDon">
 
-            <label for="nomDonneur">Nom:</label>
-            <input type="text" id="nomDonneur" name="nomDonneur"required>
+                <label for="nomDonneur">Nom:</label>
+                <input type="text" id="nomDonneur" name="nomDonneur" required>
 
-            <label for="prenomDonneur">Prénoms:</label>
-            <input type="text" id="prenomDonneur" name="prenomDonneur"required>
+                <label for="prenomDonneur">Prénoms:</label>
+                <input type="text" id="prenomDonneur" name="prenomDonneur" required>
 
-            <label for="ageDonneur">Age:</label>
-            <input type="number" id="ageDonneur" name="ageDonneur"required>
+                <label for="naissDonneur">Né(e) le:</label>
+                <input type="date" id="naissDonneur" name="naissDonneur" required>
 
-            <label for="naissDonneur">Né(e) le:</label>
-            <input type="date" id="naissDonneur" name="naissDonneur"required>
+                <label for="ageDonneur" id="age-label">Age:</label>
+                <input type="number" id="ageDonneur" name="ageDonneur" required>
 
-            <label for="lieuNaissDonneur">Lieu de naissance:</label>
-            <input type="text" id="lieuNaissDonneur" name="lieuNaissDonneur"required>
+                <label for="lieuNaissDonneur">Lieu de naissance:</label>
+                <input type="text" id="lieuNaissDonneur" name="lieuNaissDonneur" required>
 
-            <label for="professionDonneur">Profession:</label>
-            <input type="text" id="professionDonneur" name="professionDonneur" required>
+                <label for="professionDonneur">Profession:</label>
+                <input type="text" id="professionDonneur" name="professionDonneur" required>
 
-            <label for="typeSang">Groupe sanguin:</label>
-            <select id="typeSang" name="typeSang">
-                <option value="A+">A+</option>
-                <option value="A-">A-</option>
-                <option value="B+">B+</option>
-                <option value="B-">B-</option>
-                <option value="AB+">AB+</option>
-                <option value="AB-">AB-</option>
-                <option value="O+">O+</option>
-                <option value="O-">O-</option>
-            </select>
+                <label for="typeSang">Groupe sanguin:</label>
+                <select id="typeSang" name="typeSang">
+                    <option value="">Inconnu ?</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                </select>
 
 
-            <label for="sexe">Sexe:</label>
-            <select id="sexe" name="sexe">
-                <option value="homme">Homme</option>
-                <option value="femme">Femme</option>
-            </select>
+                <label for="sexe">Sexe:</label>
+                <select id="sexe" name="sexe">
+                    <option value="homme">Homme</option>
+                    <option value="femme">Femme</option>
+                </select>
 
-            <label for="situationMatrimoniale">Situation matrimoniale:</label>
-            <select id="situationMatrimoniale" name="situationMatrimoniale">
-                <option value="Marie(e)">Marie(e)</option>
-                <option value="Célibataire">Célibataire</option>
-                <option value="Veuf(ve)">Veuf(ve)</option>
-            </select>
-        </div>
-        <div class="form-column">
+                <label for="situationMatrimoniale">Situation matrimoniale:</label>
+                <select id="situationMatrimoniale" name="situationMatrimoniale">
+                    <option value="Marie(e)">Marie(e)</option>
+                    <option value="Célibataire">Célibataire</option>
+                    <option value="Veuf(ve)">Veuf(ve)</option>
+                </select>
+            </div>
+            <div class="form-column">
 
-            <label for="adresseQuartier">Adresse - Quartier:</label>
-            <input type="text" id="adresseQuartier" name="adresseQuartier"required>
+                <label for="adresseQuartier">Adresse - Quartier:</label>
+                <input type="text" id="adresseQuartier" name="adresseQuartier" required>
 
-            <label for="adresseMaison">Adresse - Maison:</label>
-            <input type="text" id="adresseMaison" name="adresseMaison"required>
+                <label for="adresseMaison">Adresse - Maison:</label>
+                <input type="text" id="adresseMaison" name="adresseMaison" required>
 
-            <label for="ethnie">Ethnie:</label>
-            <input type="text" id="ethnie" name="ethnie"required>
+                <label for="ethnie">Ethnie:</label>
+                <input type="text" id="ethnie" name="ethnie" required>
 
-            <label for="niveauEtude">Niveau d'étude:</label>
-            <input type="text" id="niveauEtude" name="niveauEtude"required>
+                <label for="niveauEtude">Niveau d'étude:</label>
+                <input type="text" id="niveauEtude" name="niveauEtude" required>
 
-            <label for="telPersoDonneur">Téléphone personnel:</label>
-            <input type="tel" id="telPersoDonneur" name="telPersoDonneur"required>
+                <label for="telPersoDonneur">Téléphone personnel:</label>
+                <input type="tel" id="telPersoDonneur" name="telPersoDonneur" required>
 
-            <label for="emailDonneur">Email:</label>
-            <input type="email" id="emailDonneur" name="emailDonneur"required>
+                <label for="emailDonneur">Email:</label>
+                <input type="email" id="emailDonneur" name="emailDonneur" required>
 
-            <label for="lieuTravail">Lieu de travail:</label>
-            <input type="text" id="lieuTravail" name="lieuTravail"required>
+                <label for="lieuTravail">Lieu de travail:</label>
+                <input type="text" id="lieuTravail" name="lieuTravail" required>
 
-            <label for="telTravail">Téléphone travail:</label>
-            <input type="tel" id="telTravail" name="telTravail"required>
+                <label for="telTravail">Téléphone travail:</label>
+                <input type="tel" id="telTravail" name="telTravail" required>
 
-            <label for="nomContactUrgence">Nom contact d'urgence:</label>
-            <input type="text" id="nomContactUrgence" name="nomContactUrgence"required>
+                <label for="nomContactUrgence">Nom contact d'urgence:</label>
+                <input type="text" id="nomContactUrgence" name="nomContactUrgence" required>
 
-            <label for="telContactUrgence">Téléphone contact d'urgence:</label>
-            <input type="tel" id="telContactUrgence" name="telContactUrgence"required>
-        </div>
+                <label for="telContactUrgence">Téléphone contact d'urgence:</label>
+                <input type="tel" id="telContactUrgence" name="telContactUrgence" required>
+            </div>
 
             <button type="submit">Soumettre</button>
         </form>
     </div>
 
-    <script src=".\JS\form_donneur_page_script.js"></script>
+    <script>
+        // Sélectionnez l'élément de date de naissance
+        var naissDonneurInput = document.getElementById("naissDonneur");
+        // Ajoutez un écouteur d'événements pour surveiller les changements de date
+        naissDonneurInput.addEventListener("change", function() {
+            // Obtenez la date sélectionnée
+            var selectedDate = new Date(naissDonneurInput.value);
+            // Obtenez la date courante
+            var currentDate = new Date();
+            // Calculez la différence d'âge en millisecondes (18 ans = 18 * 365 * 24 * 60 * 60 * 1000)
+            var minAgeDate = new Date(currentDate.getFullYear() - 18, currentDate.getMonth(), currentDate.getDate());
+            // Vérifiez si la date sélectionnée est supérieure à la date courante
+            if (selectedDate > currentDate) {
+                alert("La date de naissance ne peut pas être dans le futur.");
+                naissDonneurInput.value = ""; // Réinitialiser la date
+            }
+            // Vérifiez si la date sélectionnée est inférieure à 18 ans par rapport à la date courante
+            if (selectedDate > minAgeDate) {
+                alert("Vous devez avoir au moins 18 ans pour vous inscrire.");
+                naissDonneurInput.value = ""; // Réinitialiser la date
+            }
+        });
+
+        document.getElementById('naissDonneur').addEventListener('change', function() {
+            const birthDate = new Date(this.value);
+            const today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const monthDiff = today.getMonth() - birthDate.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            document.getElementById('ageDonneur').value = age;
+        });
+    </script>
 </body>
+
 </html>

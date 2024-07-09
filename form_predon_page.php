@@ -333,8 +333,8 @@
                 <label for="pools_bouche">Pools Bouche</label>
                 <input type="text" id="pools_bouche" name="pools_bouche" requ>
 
-                <label for="choix_donneur">Donneurs</label>
-                <select id="type_poche" name="type_poche" requ>
+                <label for="validation_donneur">Donneurs</label>
+                <select id="validation_donneur" name="validation_donneur" requ>
                     <option value="donneurs_acceptes">Donneurs acceptés</option>
                     <option value="donneurs_refuses">Donneurs refusés</option>
                 </select>

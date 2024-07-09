@@ -237,11 +237,12 @@ mysqli_close($conn);
                             'pools_paumes' => 'Pools Paumes',
                             'pools_peau' => 'Pools Peau',
                             'pools_bouche' => 'Pools Bouche',
-                            'type_poche' => 'Donneurs',
+                            'validation_donneur' => 'validation du Donneur',
                             'volume_prelever' => 'Volume à prélever (cc)',
                             'motif_refus' => 'Motif et durée de refus',
                             'examinateur' => 'Examinateur',
                             'n_poche' => 'N° de poche',
+                            'type_poche' => 'Type de Poche',
                             'deroulement_don' => 'Déroulement du Don',
                             'debut' => 'Début :',
                             'fin' => 'Fin :',
@@ -262,7 +263,7 @@ mysqli_close($conn);
                                 $date_reponse = $row['date_reponse'];
 
                                 // Ne pas afficher les réponses vides ou les dates invalides
-                                if ($reponse === '' || $date_reponse === '0000-00-00') {
+                                if ($reponse === '') {
                                     continue;
                                 }
                                 // Récupérer la question correspondante
@@ -271,7 +272,11 @@ mysqli_close($conn);
                                 echo "<tr>";
                                 echo "<td>$question</td>";
                                 echo "<td>$reponse</td>";
-                                echo "<td>$date_reponse</td>";
+                                if ($date_reponse === '0000-00-00') {
+                                    echo "<td></td>";
+                                } else {
+                                    echo "<td>$date_reponse</td>";
+                                }
                                 echo "</tr>";
                             }
                             echo "</table>";
