@@ -55,14 +55,14 @@ input,
 select,
 button {
     width: 100%;
-    padding: 6px; /* Réduire le rembourrage des champs */
+    padding: 6px; 
     font-size: 14px;
     border: 1px solid #ced4da;
     border-radius: 5px;
 }
 
 button {
-    background-color: #DF3131; /* Nouvelle couleur */
+    background-color: #DF3131; 
     color: white;
     font-weight: bold;
     cursor: pointer;
