@@ -75,6 +75,7 @@ mysqli_close($conn);
         <nav class="navbar">
             <a class="active" href="formulaire_evenement.page.php">Add Evenements</a>
             <a class="active" href="all_evenement.page.php">Evenements</a>
+            <a class="active" href="connexion_employer.php">V</a>
             <a href="#employer"></a>
         </nav>
         <div class="men">
