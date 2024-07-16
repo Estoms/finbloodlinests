@@ -1,3 +1,9 @@
+<?php
+if (!isset($_GET['acces'])) {
+    header("Location: index.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +16,7 @@
             background-color: #841c1c;
             color: white;
         }
-        .container {
+        .container_employer {
             background-color: white;
             padding: 20px;
             border-radius: 10px;
@@ -36,14 +42,14 @@
     </style>
 </head>
 <body>
-    <div class="container mt-5">
+    <div class="container_employer mt-5">
         <h2>Employer</h2>
         <a class="btn btn-success mt-5" href="./form_add_employer.php">New</a>
         <a class="btn btn-success mt-5" href="javascript:history.go(-1);">Retour</a>
-        <?php 
-            include('connexion.php');
-            $req = $conn->query("select * from employer");
-            echo '
+        <?php
+        include('connexion.php');
+        $req = $conn->query("select * from employer");
+        echo '
             <table class="table table-striped mt-5">
             <thead>
                 <tr>
@@ -60,31 +66,31 @@
             </thead>
             <tbody>
             ';
-            while($donnees = mysqli_fetch_assoc($req)) {
-                $id = $donnees["idEmployer"];
-                echo '<tr>';
-                echo "<td>".$donnees["Matricule"]."</td>";
-                echo "<td>".$donnees["nom"]." ".$donnees["prenom"]."</td>";
-                echo "<td>".$donnees["prenom"]."</td>";
-                echo "<td>".$donnees["sexe"]."</td>";
-                echo "<td>".$donnees["adresse"]."</td>";
-                echo "<td>".$donnees["tel"]."</td>";
-                echo "<td>".$donnees["email"]."</td>";
-                echo "<td>".$donnees["Poste"]."</td>";
-                echo "<td>
-                    <form action='form_add_employer.php?id=".$id."' method='post'>
+        while ($donnees = mysqli_fetch_assoc($req)) {
+            $id = $donnees["idEmployer"];
+            echo '<tr>';
+            echo "<td>" . $donnees["Matricule"] . "</td>";
+            echo "<td>" . $donnees["nom"] . " " . $donnees["prenom"] . "</td>";
+            echo "<td>" . $donnees["prenom"] . "</td>";
+            echo "<td>" . $donnees["sexe"] . "</td>";
+            echo "<td>" . $donnees["adresse"] . "</td>";
+            echo "<td>" . $donnees["tel"] . "</td>";
+            echo "<td>" . $donnees["email"] . "</td>";
+            echo "<td>" . $donnees["Poste"] . "</td>";
+            echo "<td>
+                    <form action='form_add_employer.php?id=" . $id . "' method='post'>
                         <input class='btn btn-danger' type='submit' value='Edit' name='modifier'/>
                     </form>
                 </td>";
-                echo "<td>
-                    <form action='delete.php?id=".$id."' method='post'>
+            echo "<td>
+                    <form action='delete.php?id=" . $id . "' method='post'>
                         <input class='btn btn-primary' type='submit' value='Delete' name='supprimer'/>
                     </form>
                 </td>";
-                echo '</tr>';
-            }
+            echo '</tr>';
+        }
         ?>
-            </tbody>
+        </tbody>
         </table>
     </div>
 </body>

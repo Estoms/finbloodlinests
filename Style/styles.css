@@ -31,6 +31,7 @@ body{
   color: white;
   font-size: 1.2rem;
   margin: 0 25px;
+  text-decoration: none;
 }
 .navbar a.active {
   color: white;
@@ -38,6 +39,7 @@ body{
 }
 .men a {
   color: white;
+  text-decoration: none;
   
 }
 
@@ -50,8 +52,6 @@ body{
 .header .navbar {
   margin-left: 200px;
 }
-
-
 
 .principale {
     margin-top: 45px;
@@ -98,4 +98,132 @@ body{
 
 .dashboard-content table td {
     background-color: #fff;
+}
+
+
+
+#openPopup {
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.popup-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 400px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.close:hover,
+.close:focus {
+  color: #DF3131;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.container {
+  padding: 70px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  color: #DF3131;
+}
+
+.input-container {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+label {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+input:focus+label,
+input:valid+label {
+  top: -10px;
+  font-size: 12px;
+  color: blue;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+}
+
+input:focus {
+  outline: none;
+  border: 1px solid blue;
+}
+
+.input-container input[type="password"] {
+  padding-right: 10px;
+  /* Ajoutez un espace pour l'icône */
+}
+
+.input-container .eye-icon {
+  position: absolute;
+  top: 50%;
+  right: 0px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 1;
+}
+
+input[type="submit"] {
+  background-color: #DF3131;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  width: 130px;
+  margin-left: 20px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#loginResult {
+  margin-top: 20px;
+  color: #DF3131;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+      width: 90%;
+      padding: 30px;
+  }
 }

@@ -54,7 +54,6 @@ foreach ($data as $user) {
     $stmt->close();
 }
 
-// Fermer la connexion et retourner une réponse réussie
 $conn->close();
 echo json_encode(["message" => "Utilisateurs ajoutés avec succès"]);
 ?>

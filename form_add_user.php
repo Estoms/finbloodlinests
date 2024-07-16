@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <h1>Gestion des Utilisateurs</h1>
+        <h1>Utilisateurs</h1>
     </header>
     <main>
         <section id="members-section">
@@ -19,7 +19,6 @@
             <h2>Administrateurs</h2>
             <ul id="administrators-list"></ul>
         </section>
-
         <h2>Ajouter un Utilisateur</h2>
         <table id="participants-table">
             <thead>
@@ -49,7 +48,6 @@
     </main>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Charger les utilisateurs existants
             fetch("get_users.php")
                 .then(response => response.json())
                 .then(users => {
@@ -70,12 +68,9 @@
                 .catch(error => {
                     console.error("Erreur:", error);
                 });
-
             const addRowBtn = document.getElementById("add-row-btn");
             const submitBtn = document.getElementById("submit-btn");
             const tableBody = document.querySelector("#participants-table tbody");
-
-            // Ajouter une ligne au tableau
             addRowBtn.addEventListener("click", function() {
                 const newRow = `
                     <tr>
@@ -92,16 +87,12 @@
                 `;
                 tableBody.insertAdjacentHTML("beforeend", newRow);
             });
-
-            // Supprimer une ligne du tableau
             tableBody.addEventListener("click", function(event) {
                 if (event.target.classList.contains("remove-row-btn")) {
                     const row = event.target.closest("tr");
                     row.remove();
                 }
             });
-
-            // Soumettre le formulaire
             submitBtn.addEventListener("click", function() {
                 const participants = tableBody.querySelectorAll("tr");
                 const formData = [];
@@ -111,8 +102,6 @@
                     const badge = participant.querySelector("select[name='badgeUtilisateur[]']").value;
                     formData.push({ email: email, motDePasse: motDePasse, badge: badge });
                 });
-
-                // Envoyer les données au script PHP pour insertion dans la base de données
                 fetch("add_users.php", {
                     method: "POST",
                     headers: {
