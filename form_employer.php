@@ -6,6 +6,7 @@ if (!isset($_GET['acces'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,36 +17,43 @@ if (!isset($_GET['acces'])) {
             background-color: #841c1c;
             color: white;
         }
+
         .container_employer {
             background-color: white;
             padding: 20px;
             border-radius: 10px;
         }
+
         h2 {
             color: #841c1c;
         }
+
         .btn-success {
             background-color: #28a745;
             border-color: #28a745;
         }
+
         .btn-danger {
             background-color: #dc3545;
             border-color: #dc3545;
         }
+
         .btn-primary {
             background-color: #007bff;
             border-color: #007bff;
         }
+
         table {
             color: black;
         }
     </style>
 </head>
+
 <body>
     <div class="container_employer mt-5">
         <h2>Employer</h2>
         <a class="btn btn-success mt-5" href="./form_add_employer.php">New</a>
-        <a class="btn btn-success mt-5" href="javascript:history.go(-1);">Retour</a>
+        <a class="btn btn-success mt-5" class="a_retour" href="javascript:history.go(-1);">Retour</a>
         <?php
         include('connexion.php');
         $req = $conn->query("select * from employer");
@@ -94,4 +102,5 @@ if (!isset($_GET['acces'])) {
         </table>
     </div>
 </body>
+
 </html>

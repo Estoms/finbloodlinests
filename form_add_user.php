@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion des Utilisateurs</title>
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="style/styleadd_user.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 </head>
+
 <body>
     <header>
         <h1>Utilisateurs</h1>
     </header>
+    <a class="btn btn-success btn-bottom-right" href="javascript:history.go(-1);">
+        <i class='bx bx-arrow-back'></i> Retour
+    </a>
     <main>
         <section id="members-section">
             <h2>Membres</h2>
@@ -100,29 +107,34 @@
                     const email = participant.querySelector("input[name='emailUtilisateur[]']").value;
                     const motDePasse = participant.querySelector("input[name='motDePasseUtilisateur[]']").value;
                     const badge = participant.querySelector("select[name='badgeUtilisateur[]']").value;
-                    formData.push({ email: email, motDePasse: motDePasse, badge: badge });
+                    formData.push({
+                        email: email,
+                        motDePasse: motDePasse,
+                        badge: badge
+                    });
                 });
                 fetch("add_users.php", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(formData)
-                })
-                .then(response => {
-                    if (response.ok) {
-                        alert("Enregistrement réussi !");
-                        location.reload();
-                    } else {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(formData)
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            alert("Enregistrement réussi !");
+                            location.reload();
+                        } else {
+                            alert("Erreur lors de l'enregistrement. Veuillez réessayer.");
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Erreur:", error);
                         alert("Erreur lors de l'enregistrement. Veuillez réessayer.");
-                    }
-                })
-                .catch(error => {
-                    console.error("Erreur:", error);
-                    alert("Erreur lors de l'enregistrement. Veuillez réessayer.");
-                });
+                    });
             });
         });
     </script>
 </body>
+
 </html>

@@ -36,8 +36,11 @@ main {
     max-width: 800px;
     margin-bottom: 2rem;
 }
-
-h1, h2 {
+a{
+    position: fixed;
+    left: 5PX;
+}
+h2 {
     margin-bottom: 1rem;
 }
 

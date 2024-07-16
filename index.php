@@ -8,7 +8,7 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
     $idService = $_POST['idService'];
-
+    $page_redirect = $_POST['page_redirect'];
     // Valider les données reçues (optionnel: éviter les injections SQL)
     $email = mysqli_real_escape_string($conn, $email);
     $password = mysqli_real_escape_string($conn, $password);
@@ -28,9 +28,14 @@ if (isset($_POST['submit'])) {
         $badge = $utilisateur['Badge'];
 
         if ($badge == 'Administrateur') {
-            // Rediriger l'administrateur vers la page form_employer.php
-            header("Location: form_employer.php?acces");
-            exit();
+            // Rediriger l'administrateur vers la page correspondante
+            if ($page_redirect==="utilisateur") {
+                header("Location: form_add_user.php?acces");
+                exit();
+            }else{
+                header("Location: form_employer.php?acces");
+                exit();
+            }
         } else {
             echo "<script>
             alert('Accès refusé');
@@ -45,8 +50,6 @@ if (isset($_POST['submit'])) {
     mysqli_close($conn);
 }
 ?>
-
-
 <?php
 session_start();
 // Vérifier si l'utilisateur est connecté, sinon le rediriger vers la page de connexion
@@ -116,23 +119,23 @@ mysqli_close($conn);
             <nav class="navbar">
                 <ul class="nav nav-pills">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"  role="button" aria-expanded="false">Evenement</a>
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">Evenement</a>
                         <ul class="dropdown-menu" style="">
-                            <li><a class="dropdown-item" href="formulaire_evenement.page.php">Add Evenements</a></li>
+                            <li><a class="dropdown-item" href="formulaire_evenement.page.php" style="color:black;">Add Evenements</a></li>
                             <li>
                                 <hr class="dropdown-divider" />
                             </li>
-                            <li><a class="dropdown-item" href="all_evenement.page.php">Evenements</a></li>
+                            <li><a class="dropdown-item" href="all_evenement.page.php" style="color:black;">Evenements</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"  role="button" aria-expanded="false">Evenement</a>
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">Evenement</a>
                         <ul class="dropdown-menu" style="">
-                            <li><a class="dropdown-item" id="openPopupEmployer">Employer</a></li>
+                            <li><a class="dropdown-item" id="openPopupEmployer" style="color:black;">Employer</a></li>
                             <li>
                                 <hr class="dropdown-divider" />
                             </li>
-                            <li><a class="dropdown-item" id="openPopupUser">Utilisateur</a></li>
+                            <li><a class="dropdown-item" id="openPopupUser" style="color:black;">Utilisateur</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -185,6 +188,7 @@ mysqli_close($conn);
                         <i class="eye-icon fas fa-eye" onclick="togglePassword()"></i>
                     </div>
                     <input type="hidden" name="idService" value="<?php echo $_SESSION['idService']; ?>">
+                    <input type="hidden" name="page_redirect" id="page_redirect">
                     <input type="submit" value="Se connecter" name="submit">
                 </form>
                 <div id="loginResult"></div>
@@ -194,12 +198,21 @@ mysqli_close($conn);
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var openPopupEmployerButton = document.getElementById("openPopupEmployer");
-            var openPopupEmployerButton = document.getElementById("openPopupEmployer2");
+            var openPopupUserButton = document.getElementById("openPopupUser");
             var popupForm = document.getElementById("popupForm");
             var closeButton = document.getElementsByClassName("close")[0];
 
             openPopupEmployerButton.onclick = function() {
                 popupForm.style.display = "block";
+            }
+            openPopupUserButton.onclick = function() {
+                popupForm.style.display = "block";
+
+                // Récupérer le champ hidden pour gérer la redirection vers la page utilisateur
+                var pageRedirectInput = document.querySelector('input[name="page_redirect"]');
+                var role = "utilisateur";
+                pageRedirectInput.value = role;
+
             }
 
             closeButton.onclick = function() {
