@@ -1,77 +1,79 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaires avec Onglets</title>
     <style>
         /* style/style.css */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 0;
-}
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
 
-header {
-    background-color: #841c1c;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-}
+        header {
+            background-color: #841c1c;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
 
-.tab-container {
-    text-align: center;
-    margin-top: 20px;
-}
+        .tab-container {
+            text-align: center;
+            margin-top: 20px;
+        }
 
-.tab-button {
-    padding: 10px 20px;
-    margin: 0 10px;
-    cursor: pointer;
-    border: none;
-    background-color: #841c1c;
-    color: white;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
+        .tab-button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            cursor: pointer;
+            border: none;
+            background-color: #841c1c;
+            color: white;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
 
-.tab-button:hover {
-    background-color: #0056b3;
-}
+        .tab-button:hover {
+            background-color: #0056b3;
+        }
 
-.form-container {
-    margin: 20px auto;
-    width: 80%;
-    max-width: 800px;
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+        .form-container {
+            margin: 20px auto;
+            width: 80%;
+            max-width: 800px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-.form-content {
-    display: none;
-}
+        .form-content {
+            display: none;
+        }
 
-.form-content.show {
-    display: block;
-    animation: fadeIn 0.5s;
-}
+        .form-content.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
 
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
+
 <body>
     <header>
         <h1>ENREGISTREMENT</h1>
@@ -173,31 +175,31 @@ header {
     </div>
     <script>
         // script.js
-document.addEventListener('DOMContentLoaded', function() {
-    const buttons = document.querySelectorAll('.tab-button');
-    const forms = document.querySelectorAll('.form-content');
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.tab-button');
+            const forms = document.querySelectorAll('.form-content');
 
-    buttons.forEach(button => {
-        button.addEventListener('click', function() {
-            const targetFormId = this.getAttribute('data-target');
-            forms.forEach(form => {
-                if (form.id === targetFormId) {
-                    form.classList.add('show');
-                } else {
-                    form.classList.remove('show');
-                }
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetFormId = this.getAttribute('data-target');
+                    forms.forEach(form => {
+                        if (form.id === targetFormId) {
+                            form.classList.add('show');
+                        } else {
+                            form.classList.remove('show');
+                        }
+                    });
+                });
             });
-        });
-    });
 
-    // Code JavaScript de form_add_user.php ici...
-    const addRowBtn = document.getElementById("add-row-btn");
-    const submitBtn = document.getElementById("submit-btn");
-    const tableBody = document.querySelector("#participants-table tbody");
-    
-    if (addRowBtn && submitBtn && tableBody) {
-        addRowBtn.addEventListener("click", function() {
-            const newRow = `
+            // Code JavaScript de form_add_user.php ici...
+            const addRowBtn = document.getElementById("add-row-btn");
+            const submitBtn = document.getElementById("submit-btn");
+            const tableBody = document.querySelector("#participants-table tbody");
+
+            if (addRowBtn && submitBtn && tableBody) {
+                addRowBtn.addEventListener("click", function() {
+                    const newRow = `
                 <tr>
                     <td><input type="email" name="emailUtilisateur[]" required></td>
                     <td><input type="password" name="motDePasseUtilisateur[]" required></td>
@@ -210,68 +212,73 @@ document.addEventListener('DOMContentLoaded', function() {
                     <td><button class="remove-row-btn">X</button></td>
                 </tr>
             `;
-            tableBody.insertAdjacentHTML("beforeend", newRow);
-        });
+                    tableBody.insertAdjacentHTML("beforeend", newRow);
+                });
 
-        tableBody.addEventListener("click", function(event) {
-            if (event.target.classList.contains("remove-row-btn")) {
-                const row = event.target.closest("tr");
-                row.remove();
-            }
-        });
-
-        submitBtn.addEventListener("click", function() {
-            const participants = tableBody.querySelectorAll("tr");
-            const formData = [];
-            participants.forEach(function(participant) {
-                const email = participant.querySelector("input[name='emailUtilisateur[]']").value;
-                const motDePasse = participant.querySelector("input[name='motDePasseUtilisateur[]']").value;
-                const badge = participant.querySelector("select[name='badgeUtilisateur[]']").value;
-                formData.push({ email: email, motDePasse: motDePasse, badge: badge });
-            });
-            fetch("add_users.php", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(formData)
-            })
-            .then(response => {
-                if (response.ok) {
-                    alert("Enregistrement réussi !");
-                    location.reload();
-                } else {
-                    alert("Erreur lors de l'enregistrement. Veuillez réessayer.");
-                }
-            })
-            .catch(error => {
-                console.error("Erreur:", error);
-                alert("Erreur lors de l'enregistrement. Veuillez réessayer.");
-            });
-        });
-
-        fetch("get_users.php")
-            .then(response => response.json())
-            .then(users => {
-                const membersList = document.getElementById("members-list");
-                const administratorsList = document.getElementById("administrators-list");
-
-                users.forEach(user => {
-                    const listItem = document.createElement("li");
-                    listItem.textContent = user.email;
-
-                    if (user.Badge === "Membre") {
-                        membersList.appendChild(listItem);
-                    } else if (user.Badge === "Administrateur") {
-                        administratorsList.appendChild(listItem);
+                tableBody.addEventListener("click", function(event) {
+                    if (event.target.classList.contains("remove-row-btn")) {
+                        const row = event.target.closest("tr");
+                        row.remove();
                     }
                 });
-            })
-            .catch(error => {
-                console.error("Erreur:", error);
-            });
-    }
-});
+
+                submitBtn.addEventListener("click", function() {
+                    const participants = tableBody.querySelectorAll("tr");
+                    const formData = [];
+                    participants.forEach(function(participant) {
+                        const email = participant.querySelector("input[name='emailUtilisateur[]']").value;
+                        const motDePasse = participant.querySelector("input[name='motDePasseUtilisateur[]']").value;
+                        const badge = participant.querySelector("select[name='badgeUtilisateur[]']").value;
+                        formData.push({
+                            email: email,
+                            motDePasse: motDePasse,
+                            badge: badge
+                        });
+                    });
+                    fetch("add_users.php", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify(formData)
+                        })
+                        .then(response => {
+                            if (response.ok) {
+                                alert("Enregistrement réussi !");
+                                location.reload();
+                            } else {
+                                alert("Erreur lors de l'enregistrement. Veuillez réessayer.");
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Erreur:", error);
+                            alert("Erreur lors de l'enregistrement. Veuillez réessayer.");
+                        });
+                });
+
+                fetch("get_users.php")
+                    .then(response => response.json())
+                    .then(users => {
+                        const membersList = document.getElementById("members-list");
+                        const administratorsList = document.getElementById("administrators-list");
+
+                        users.forEach(user => {
+                            const listItem = document.createElement("li");
+                            listItem.textContent = user.email;
+
+                            if (user.Badge === "Membre") {
+                                membersList.appendChild(listItem);
+                            } else if (user.Badge === "Administrateur") {
+                                administratorsList.appendChild(listItem);
+                            }
+                        });
+                    })
+                    .catch(error => {
+                        console.error("Erreur:", error);
+                    });
+            }
+        });
     </script>
 </body>
+
 </html>

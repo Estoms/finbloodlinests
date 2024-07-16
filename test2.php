@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -72,8 +73,9 @@
         }
     </style>
 </head>
+
 <body>
-<header>
+    <header>
         <h1>ENREGISTREMENT</h1>
     </header>
     <div class="tab-container">
@@ -81,7 +83,8 @@
         <button class="tab-button" data-target="form2">Employer</button>
     </div>
     <div class="form-container">
-    <section id="form1" class="form-content" style="display: none;">
+        <section id="form1" class="form-content" style="display: none;">
     </div>
 </body>
+
 </html>
