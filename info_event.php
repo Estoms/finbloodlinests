@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 // Coordonnées de la base de données
 include("connexion.php");
 // Création d'une nouvelle connexion
@@ -9,19 +8,15 @@ $conn = mysqli_connect($servername, $username, $passwordDB, $dbname);
 if (!$conn) {
     die("La connexion a échoué: " . mysqli_connect_error());
 }
-
-
 // Récupérer les informations de l'organisme de collecte de sang à partir de la base de données
 $idService = $_SESSION['idService'];
 $idEvenement = $_GET['id'];
-
 $sql = "SELECT * FROM service WHERE idService = '$idService'";
 $result = mysqli_query($conn, $sql);
 $organisme = mysqli_fetch_assoc($result);
 if (!$result) {
     die("Erreur lors de l'exécution de la requête : " . mysqli_error($conn));
 }
-
 // Récupérer tous les infos de léevenements
 $sqlEvenements = "SELECT * FROM evenement WHERE idService = '$idService' AND idEvenement = '$idEvenement'";
 $result_evenements = mysqli_query($conn,$sqlEvenements) ;
@@ -29,7 +24,6 @@ $evenements = mysqli_fetch_assoc($result_evenements);
 if (!$result_evenements) {
     die("Erreur lors de l'exécution de la requête : " . mysqli_error($conn));
 }
-
 // Récupérer les infos sur le lieu
 $idLieu = $evenements['idLieu'];
 $sqlLieu = "SELECT * FROM lieu WHERE idLieu = '$idLieu'";
@@ -39,19 +33,14 @@ if ($resultLieu && mysqli_num_rows($resultLieu) > 0) {
 } else {
     echo "<td>N/A</td>";
 }
-
 // Récupérer les infos sur les participants
 $sqlParticipation = "SELECT * FROM participation WHERE  idEvenement = '$idEvenement'";
 $result_participation = mysqli_query($conn,$sqlParticipation) ;
 if (!$result_participation) {
     die("Erreur lors de l'exécution de la requête : " . mysqli_error($conn));
 }
-
-
 mysqli_close($conn);
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -141,7 +130,6 @@ mysqli_close($conn);
                 </table>
             </div>
         </div>
-        
     </section>
 </div>
 </body>

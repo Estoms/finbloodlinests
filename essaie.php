@@ -3,12 +3,9 @@ function formatData($collation, $usager) {
     // Formater les sections Collation et Usager
     $collationFormatted = "Collation[Boisson(" . $collation['boisson'] . ")|Biscuits(" . $collation['biscuits'] . ")]";
     $usagerFormatted = "Usager[PocheDeSang(" . $usager['pocheDeSang'] . ")]";
-    
     // Combiner les deux sections
     return $collationFormatted . $usagerFormatted;
 }
-
-// Exemple de données pour Sortie et Retour
 $sortieData = array(
     'collation' => array('boisson' => 50, 'biscuits' => 50),
     'usager' => array('pocheDeSang' => 100)

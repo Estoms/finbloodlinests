@@ -3,7 +3,6 @@
 if (isset($_POST['submit'])) {
     // Coordonnées de la base de données
     include("connexion.php");
-
     // Récupérer les valeurs du formulaire
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -12,21 +11,17 @@ if (isset($_POST['submit'])) {
     // Valider les données reçues (optionnel: éviter les injections SQL)
     $email = mysqli_real_escape_string($conn, $email);
     $password = mysqli_real_escape_string($conn, $password);
-
     // Requête pour vérifier l'utilisateur
     $sql = "SELECT * FROM utilisateur WHERE email='$email' AND motDePasse='$password'";
     $result = mysqli_query($conn, $sql);
-
     if (!$result) {
         die("Erreur lors de l'exécution de la requête : " . mysqli_error($conn));
     }
-
     // Vérifier s'il y a une correspondance d'utilisateur
     if (mysqli_num_rows($result) == 1) {
         // Utilisateur trouvé, vérifier le badge
         $utilisateur = mysqli_fetch_assoc($result);
         $badge = $utilisateur['Badge'];
-
         if ($badge == 'Administrateur') {
             // Rediriger l'administrateur vers la page correspondante
             if ($page_redirect==="utilisateur") {
@@ -46,7 +41,6 @@ if (isset($_POST['submit'])) {
             alert('Email ou mot de passe incorrect.');
           </script>";
     }
-
     mysqli_close($conn);
 }
 ?>
@@ -58,7 +52,6 @@ if (!isset($_SESSION['idService'])) {
     header("Location: connexionOrganisme.php?");
     exit();
 }
-// Vérifier si l'utilisateur a cliqué sur le lien de déconnexion
 if (isset($_GET['logout'])) {
     // Détruire la session et rediriger vers la page de connexion
     session_destroy();
@@ -67,7 +60,6 @@ if (isset($_GET['logout'])) {
 }
 // Coordonnées de la base de données
 include("connexion.php");
-
 // Création d'une nouvelle connexion
 $conn = mysqli_connect($servername, $username, $passwordDB, $dbname);
 // Vérification de la connexion
@@ -81,10 +73,9 @@ if (isset($_SESSION['premiere_connexion'])) {
     if (!mysqli_query($conn, $sqlUpdate)) {
         die("Erreur lors de la mise à jour des événements passés : " . mysqli_error($conn));
     }
-    // Détruire la variable de session pour éviter de répéter la mise à jour à chaque chargement de page
+    // Détruire la variable de session 
     unset($_SESSION['premiere_connexion']);
 }
-
 // Récupérer les informations de l'organisme de collecte de sang à partir de la base de données
 $idService = $_SESSION['idService'];
 $sql = "SELECT * FROM service WHERE idService = '$idService'";
@@ -95,8 +86,6 @@ if (!$result) {
 $organisme = mysqli_fetch_assoc($result);
 mysqli_close($conn);
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -110,7 +99,6 @@ mysqli_close($conn);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-
 <body>
     <div class=" ">
         <header class="header" id="header">
@@ -148,7 +136,6 @@ mysqli_close($conn);
             <div class="dashboard-heading">
                 <p><strong><span><?php echo $organisme['nomOrganisme']; ?></span></strong> !</p>
             </div>
-
             <div class="dashboard-content">
                 <h3>Informations du Service :</h3>
                 <table>
@@ -170,8 +157,6 @@ mysqli_close($conn);
             </div>
         </section>
     </div>
-
-
     <div id="popupForm" class="popup">
         <div class="popup-content">
             <span class="close">&times;</span>
@@ -201,24 +186,19 @@ mysqli_close($conn);
             var openPopupUserButton = document.getElementById("openPopupUser");
             var popupForm = document.getElementById("popupForm");
             var closeButton = document.getElementsByClassName("close")[0];
-
             openPopupEmployerButton.onclick = function() {
                 popupForm.style.display = "block";
             }
             openPopupUserButton.onclick = function() {
                 popupForm.style.display = "block";
-
-                // Récupérer le champ hidden pour gérer la redirection vers la page utilisateur
                 var pageRedirectInput = document.querySelector('input[name="page_redirect"]');
                 var role = "utilisateur";
                 pageRedirectInput.value = role;
 
             }
-
             closeButton.onclick = function() {
                 popupForm.style.display = "none";
             }
-
             window.onclick = function(event) {
                 if (event.target == popupForm) {
                     popupForm.style.display = "none";
@@ -229,7 +209,6 @@ mysqli_close($conn);
         function togglePassword() {
             var passwordInput = document.getElementById("password");
             var eyeIcon = document.querySelector(".eye-icon");
-
             if (passwordInput.type === "password") {
                 passwordInput.type = "text";
                 eyeIcon.classList.remove("fa-eye");
@@ -242,5 +221,4 @@ mysqli_close($conn);
         }
     </script>
 </body>
-
 </html>

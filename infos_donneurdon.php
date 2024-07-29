@@ -2,7 +2,7 @@
 session_start();
 // Coordonnées de la base de données
 include("connexion.php");
-// Création d'une nouvelle connexion
+// Création d'une nouvelle connexion facultatif, je vais le supprimer dans la version suivante
 $conn = mysqli_connect($servername, $username, $passwordDB, $dbname);
 // Vérification de la connexion
 if (!$conn) {
@@ -44,10 +44,8 @@ if (!$result_donneur) {
 }
 mysqli_close($conn);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -56,7 +54,6 @@ mysqli_close($conn);
     <link rel="stylesheet" href=".\Style\form_don_page_styles.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-
 <body>
     <div class="container">
         <header class="header" id="header">
@@ -68,7 +65,6 @@ mysqli_close($conn);
                 <a href="javascript:history.go(-1);">Retour</a>
             </nav>
             <div class="men">
-
             </div>
         </header>
         <section class="principale">
@@ -165,11 +161,8 @@ mysqli_close($conn);
                     </table> <br>
                     <div>
                         <?php
-                        // Coordonnées de la base de données
                         include("connexion.php");
-                        // Création d'une nouvelle connexion
                         $conn = mysqli_connect($servername, $username, $passwordDB, $dbname);
-                        // Vérification de la connexion
                         if (!$conn) {
                             die("La connexion a échoué: " . mysqli_connect_error());
                         }
@@ -249,11 +242,9 @@ mysqli_close($conn);
                             'autres_infos' => 'Autres informations',
                             'preleveur' => 'Préleveur',
                         ];
-
                         // Requête pour récupérer les réponses de la base de données
                         $sql = "SELECT idQuestion, reponse, date_reponse FROM participationdonneur WHERE idDonneur = '$id_donneur' AND idEvenement = '$idEvenement'";
                         $result = $conn->query($sql);
-
                         if ($result->num_rows > 0) {
                             echo "<table border='2'>";
                             echo "<tr><th>Question</th><th>Réponse</th><th>Date</th></tr>";
@@ -261,14 +252,12 @@ mysqli_close($conn);
                                 $idQuestion = $row['idQuestion'];
                                 $reponse = $row['reponse'];
                                 $date_reponse = $row['date_reponse'];
-
                                 // Ne pas afficher les réponses vides ou les dates invalides
                                 if ($reponse === '') {
                                     continue;
                                 }
                                 // Récupérer la question correspondante
                                 $question = isset($questions_map[$idQuestion]) ? $questions_map[$idQuestion] : $idQuestion;
-
                                 echo "<tr>";
                                 echo "<td>$question</td>";
                                 echo "<td>$reponse</td>";
@@ -285,12 +274,10 @@ mysqli_close($conn);
                         }
                         mysqli_close($conn);
                         ?>
-
                     </div>
                 </div>
             </div>
         </section>
     </div>
 </body>
-
 </html>

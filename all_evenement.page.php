@@ -3,14 +3,12 @@ session_start();
 
 // Vérifier si l'utilisateur est connecté, sinon le rediriger vers la page de connexion
 if (!isset($_SESSION['idService'])) {
-    // Rediriger vers la page de connexion s'il n'est pas connecté
     header("Location: connexionOrganisme.php");
     exit();
 }
 
 // Vérifier si l'utilisateur a cliqué sur le lien de déconnexion
 if (isset($_GET['logout'])) {
-    // Détruire la session et rediriger vers la page de connexion
     session_destroy();
     header("Location: connexionOrganisme.php");
     exit();
@@ -18,7 +16,6 @@ if (isset($_GET['logout'])) {
 
 // Coordonnées de la base de données
 include("connexion.php");
-
 // Création d'une nouvelle connexion
 $conn = mysqli_connect($servername, $username, $passwordDB, $dbname);
 

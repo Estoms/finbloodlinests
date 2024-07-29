@@ -255,7 +255,6 @@
                             alert("Erreur lors de l'enregistrement. Veuillez réessayer.");
                         });
                 });
-
                 fetch("get_users.php")
                     .then(response => response.json())
                     .then(users => {
@@ -280,5 +279,4 @@
         });
     </script>
 </body>
-
 </html>

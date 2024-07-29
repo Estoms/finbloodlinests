@@ -2,16 +2,13 @@
 session_start();
 // Coordonnées de la base de données
 include("connexion.php");
-
 // Vérification de la connexion
 if (!$conn) {
     die("La connexion a échoué: " . mysqli_connect_error());
 }
-
 $_SESSION['idEvenement'] = $_GET['id'];
 $idService = $_SESSION['idService'];
 $idEvenement = $_GET['id'];
-
 // Récupérer les données de l'organisme
 $sql = "SELECT * FROM service WHERE idService = '$idService'";
 $result = mysqli_query($conn, $sql);
@@ -19,15 +16,13 @@ $organisme = mysqli_fetch_assoc($result);
 if (!$result) {
     die("Erreur lors de l'exécution de la requête : " . mysqli_error($conn));
 }
-
-// Récupérer tous les infos de l'événement
+// récupérer les infos sur l'évenement
 $sqlEvenements = "SELECT * FROM evenement WHERE idService = '$idService' AND idEvenement = '$idEvenement'";
 $result_evenements = mysqli_query($conn, $sqlEvenements);
 $evenements = mysqli_fetch_assoc($result_evenements);
 if (!$result_evenements) {
     die("Erreur lors de l'exécution de la requête : " . mysqli_error($conn));
 }
-
 // Récupérer les infos sur le lieu
 $idLieu = $evenements['idLieu'];
 $sqlLieu = "SELECT * FROM lieu WHERE idLieu = '$idLieu'";
@@ -37,15 +32,12 @@ if ($resultLieu && mysqli_num_rows($resultLieu) > 0) {
 } else {
     echo "<td>N/A</td>";
 }
-
 // Récupérer les données de gestPF pour l'événement
 $sqlGestPF = "SELECT * FROM gestPF WHERE idEvenement = '$idEvenement'";
 $resultGestPF = mysqli_query($conn, $sqlGestPF);
 $gestPF = mysqli_fetch_assoc($resultGestPF);
-
 // Fermer la connexion
 mysqli_close($conn);
-
 // Extraire les données de Sorties et Retour
 $sorties_boissons = "";
 $sorties_biscuits = "";
@@ -53,10 +45,8 @@ $sorties_usager = "";
 $retour_boissons = "";
 $retour_biscuits = "";
 $retour_usager = "";
-
 $sorties_disabled = "";
 $retour_disabled = "";
-
 if ($gestPF) {
     // Extraction des données de Sorties
     if (!empty($gestPF['Sorties'])) {
@@ -67,12 +57,10 @@ if ($gestPF) {
         preg_match('/Usager\[(.*?)\]/', $gestPF['Sorties'], $matches);
         $sorties_usager = $matches[1] ?? "";
     }
-
     // Désactiver les champs de Sorties si des données existent
     if (!empty($sorties_boissons) || !empty($sorties_biscuits) || !empty($sorties_usager)) {
         $sorties_disabled = "disabled";
     }
-
     // Extraction des données de Retour
     if (!empty($gestPF['Retour'])) {
         preg_match('/Boisson\((.*?)\)/', $gestPF['Retour'], $matches);
@@ -82,7 +70,6 @@ if ($gestPF) {
         preg_match('/Usager\[(.*?)\]/', $gestPF['Retour'], $matches);
         $retour_usager = $matches[1] ?? "";
     }
-
     // Désactiver les champs de Retour si des données existent
     if (!empty($retour_boissons) || !empty($retour_biscuits) || !empty($retour_usager)) {
         $retour_disabled = "disabled";

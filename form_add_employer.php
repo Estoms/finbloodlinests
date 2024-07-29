@@ -1,15 +1,12 @@
 <?php
-session_start(); // Démarrer la session
-
+session_start();
 // Vérifie si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Inclure le fichier de connexion à la base de données
     include("connexion.php");
 
-    // Créer une nouvelle connexion à la base de données
+    // Créer une nouvelle connexion à la base de données et vérifier
     $conn = mysqli_connect($servername, $username, $passwordDB, $dbname);
-
-    // Vérifier la connexion
     if (!$conn) {
         echo "<script>alert('La connexion à la base de données a échoué. Veuillez réessayer.');</script>";
     } else {
@@ -38,13 +35,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Requête SQL pour insérer les données
         $insert_sql = "INSERT INTO employer (Matricule, nom, prenom, sexe, adresse, tel, email, Poste, idService) 
         VALUES ('$matricule', '$nom', '$prenom', '$sexe', '$adresse', '$tel', '$email', '$poste', '$idService')";
-
         if (mysqli_query($conn, $insert_sql)) {
             echo "<script>alert('Employé ajouté avec succès.');</script>";
         } else {
             echo "<script>alert('Erreur lors de l\'insertion des données.');</script>";
         }
-        
         // Fermer la connexion à la base de données
         mysqli_close($conn);
     }
@@ -58,7 +53,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href=".\Style\form_add_employer.css">
     <title>Formulaire Moderne</title>
 </head>
-
 <body>
     <div class="container">
         <h2>Ajouter un employé</h2>

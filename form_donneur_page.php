@@ -1,15 +1,11 @@
 <?php
-session_start(); // Démarrer la session
-
+session_start();
 // Vérifie si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Inclure le fichier de connexion à la base de données
     include("connexion.php");
-
-    // Créer une nouvelle connexion à la base de données
+    // Créer une nouvelle connexion à la base de données et vérifier la connexion
     $conn = mysqli_connect($servername, $username, $passwordDB, $dbname);
-
-    // Vérifier la connexion
     if (!$conn) {
         echo "<script>alert('La connexion à la base de données a échoué. Veuillez réessayer.');</script>";
     } else {
@@ -35,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $nomContactUrgence = $_POST['nomContactUrgence'];
         $telContactUrgence = $_POST['telContactUrgence'];
 
-        // Échapper les caractères spéciaux pour éviter les injections SQL
+        // Échapper les caractères spéciaux 
         $numCarteDon = mysqli_real_escape_string($conn, $numCarteDon);
         $nomDonneur = mysqli_real_escape_string($conn, $nomDonneur);
         $prenomDonneur = mysqli_real_escape_string($conn, $prenomDonneur);
@@ -100,13 +96,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "<script>alert('Erreur lors de l'enregistrement. Veuillez réessayer.');</script>";
             }
         }
-
-        // Fermer la connexion à la base de données
         mysqli_close($conn);
     }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -127,7 +120,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h2>Identité du donneur</h2>
         </div>
         <form id="myForm" method="post" action="form_donneur_page.php">
-
             <div class="form-column">
                 <label for="numCarteDon">Numéro de la carte de donneur:</label>
                 <input type="text" id="numCarteDon" name="numCarteDon">
@@ -162,7 +154,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <option value="O+">O+</option>
                     <option value="O-">O-</option>
                 </select>
-
 
                 <label for="sexe">Sexe:</label>
                 <select id="sexe" name="sexe">
@@ -236,7 +227,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 naissDonneurInput.value = ""; // Réinitialiser la date
             }
         });
-
         document.getElementById('naissDonneur').addEventListener('change', function() {
             const birthDate = new Date(this.value);
             const today = new Date();

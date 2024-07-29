@@ -303,7 +303,6 @@
                 </tr>
             </table>
         </div>
-
         <div class="cont">
             <div class="form-column">
                 <label for="nombre_don_ant">Nombre de dons antérieurs</label>
@@ -385,7 +384,6 @@
         <button type="submit" name="btn_quest">Envoyer</button>
     </div>
     </form>
-
     <script>
     function setDateTimeDefaults() {
         const now = new Date();
@@ -393,7 +391,6 @@
         document.getElementById('debut').value = formattedDateTime;
         document.getElementById('fin').value = formattedDateTime;
     }
-
     window.onload = setDateTimeDefaults;
 </script>
 </body>

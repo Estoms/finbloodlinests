@@ -76,26 +76,18 @@ $questions_map = [
 ];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-   
-     // Coordonnées de la base de données
      include("connexion.php");
-     // Créer une nouvelle connexion à la base de données
+     // facultatif je vais le supprimer par la suite 
     $conn = mysqli_connect($servername, $username, $passwordDB, $dbname);
-
     if ($conn->connect_error) {
         die("Connexion échouée: " . $conn->connect_error);
     }
-
     foreach ($questions_map as $key => $question) {
         $response = isset($_POST[$key]) ? $_POST[$key] : '';
         $date = isset($_POST["date_$key"]) ? $_POST["date_$key"] : null;
-
-        
         // Récupérer les données 
         $idDonneur = $_SESSION['idDonneur'];
         $idEvenement = $_SESSION['idEvenement'];
-        
-
         $sql = "INSERT INTO participationdonneur (idQuestion, reponse, date_reponse,idDonneur,idEvenement) VALUES ('$key', '$response', '$date','$idDonneur','$idEvenement')";
         if ($conn->query($sql) === TRUE) {
             echo "Réponse pour $key insérée avec succès.<br>";
@@ -105,10 +97,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     // Fermer la connexion
     $conn->close();
- 
          // Détruire la variable de session idDonneur
         unset($_SESSION['idDonneur']);
-    
         // Rediriger vers form_don_page.php
         header("Location: form_don_page.php?id=$idEvenement");
         exit();

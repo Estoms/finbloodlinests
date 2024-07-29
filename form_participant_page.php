@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire Participants</title>
- 
     <link rel="stylesheet" href=".\Style\form_participant_page.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
@@ -55,7 +54,6 @@
             `;
             tableBody.insertAdjacentHTML("beforeend", newRow);
         });
-
         // Soumettre le formulaire
         submitBtn.addEventListener("click", function() {
             const participants = tableBody.querySelectorAll("tr");
@@ -67,7 +65,6 @@
                 const idEvenement = <?php echo isset($_GET['idEvenement']) ? json_encode($_GET['idEvenement']) : "null"; ?>;
                 formData.push({ nom: nom, telephone: telephone, commentaire: commentaire, idEvenement: idEvenement });
             });
-            
             // Envoyer les données au script PHP pour insertion dans la base de données
             const xhr = new XMLHttpRequest();
             xhr.open("POST", "<?php echo $_SERVER['PHP_SELF']; ?>", true);
@@ -93,14 +90,10 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Coordonnées de la base de données
     include("connexion.php");
-
     // Récupérer les données envoyées par la requête AJAX
     $data = json_decode(file_get_contents("php://input"), true);
-
     // Créer une nouvelle connexion à la base de données
     $conn = mysqli_connect($servername, $username, $passwordDB, $dbname);
-
-    // Vérifier la connexion
     if (!$conn) {
         http_response_code(500);
         exit("La connexion à la base de données a échoué. Veuillez réessayer.");
@@ -114,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit("Erreur lors de la préparation de la requête SQL. Veuillez réessayer.");
     }
 
-    // Exécuter l'insertion pour chaque participant
+    // pour chaque partiicpant effectur une insertion
     foreach ($data as $participant) {
         mysqli_stmt_bind_param($stmt, "sssi", $participant['nom'], $participant['telephone'], $participant['commentaire'], $participant['idEvenement']);
         if (!mysqli_stmt_execute($stmt)) {
@@ -122,11 +115,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit("Erreur lors de l'insertion des données. Veuillez réessayer.");
         }
     }
-
     // Fermer la connexion à la base de données
     mysqli_stmt_close($stmt);
     mysqli_close($conn);
-
     // Réponse réussie
     http_response_code(200);
     exit("success");

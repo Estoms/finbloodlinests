@@ -5,7 +5,6 @@ include("connexion.php");
 $message = "";
 // Variable pour stocker l'URL de redirection
 $redirect_url = "gestE_S.php"; 
-
 // Vérification si le formulaire de Sorties est soumis
 if (isset($_POST['sendSorties'])) {
     // Récupération des valeurs du formulaire de Sorties
@@ -27,7 +26,6 @@ if (isset($_POST['sendSorties'])) {
         $message = "Erreur lors de l'enregistrement des Sorties : " . mysqli_error($conn);
     }
 }
-
 // Vérification si le formulaire de Retour est soumis
 if (isset($_POST['sendRetour'])) {
     // Récupération des valeurs du formulaire de Retour
@@ -50,7 +48,6 @@ if (isset($_POST['sendRetour'])) {
         $message = "Erreur lors de l'enregistrement du Retour : " . mysqli_error($conn);
     }
 }
-
 // Fermeture de la connexion à la base de données
 mysqli_close($conn);
 ?>

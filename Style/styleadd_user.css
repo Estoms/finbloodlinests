@@ -1,10 +1,8 @@
-/* Réinitialisation de base */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f4;
@@ -14,19 +12,16 @@ body {
     align-items: center;
     min-height: 100vh;
 }
-
 header, footer {
-    background-color: #841c1c; /* Nouvelle couleur */
+    background-color: #841c1c;
     color: white;
     text-align: center;
     padding: 1rem 0;
     width: 100%;
 }
-
 header {
     margin-bottom: 2rem;
 }
-
 main {
     background: white;
     padding: 2rem;
@@ -45,25 +40,21 @@ h2 {
 }
 
 h2 {
-    color: #841c1c; /* Nouvelle couleur */
+    color: #841c1c; 
 }
-
 table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 1rem;
 }
-
 th, td {
     padding: 0.75rem;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
-
 th {
     background-color: #f9f9f9;
 }
-
 input[type="text"], input[type="email"], input[type="password"], select {
     width: 100%;
     padding: 0.5rem;
@@ -71,10 +62,9 @@ input[type="text"], input[type="email"], input[type="password"], select {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-
 button {
     padding: 0.75rem 1.5rem;
-    background-color: #841c1c; /* Nouvelle couleur */
+    background-color: #841c1c;
     color: white;
     border: none;
     border-radius: 4px;
@@ -82,16 +72,13 @@ button {
     font-size: 1rem;
     margin: 0.5rem 0;
 }
-
 button:hover {
-    background-color: #e74c3c; /* Rouge */
+    background-color: #e74c3c;
 }
-
 ul {
     list-style-type: none;
     padding: 0;
 }
-
 ul li {
     background: #f9f9f9;
     margin: 0.5rem 0;
@@ -102,15 +89,12 @@ ul li {
     justify-content: space-between;
     align-items: center;
 }
-
 ul li:nth-child(odd) {
     background: #f1f1f1;
 }
-
 ul li button {
-    background-color: #e74c3c; /* Rouge */
+    background-color: #e74c3c;
 }
-
 ul li button:hover {
-    background-color: #c0392b; /* Rouge plus foncé au survol */
+    background-color: #c0392b;
 }

@@ -1,20 +1,17 @@
 <?php
 session_start();
-
 // Coordonnées de la base de données
 include("connexion.php");
-// Création d'une nouvelle connexion
+// Création d'une nouvelle connexion faculatatif à retirer dans la prochaine version
 $conn = mysqli_connect($servername, $username, $passwordDB, $dbname);
 // Vérification de la connexion
 if (!$conn) {
     die("La connexion a échoué: " . mysqli_connect_error());
 }
-
 $_SESSION['idEvenement'] = $_GET['id'];
 // Récupérer les données 
 $idService = $_SESSION['idService'];
 $idEvenement = $_GET['id'];
-
 $sql = "SELECT * FROM service WHERE idService = '$idService'";
 $result = mysqli_query($conn, $sql);
 $organisme = mysqli_fetch_assoc($result);
@@ -22,14 +19,14 @@ if (!$result) {
     die("Erreur lors de l'exécution de la requête : " . mysqli_error($conn));
 }
 
-// Récupérer tous les infos de lévenements
+// Récupérer les données evenements
 $sqlEvenements = "SELECT * FROM evenement WHERE idService = '$idService' AND idEvenement = '$idEvenement'";
 $result_evenements = mysqli_query($conn,$sqlEvenements) ;
 $evenements = mysqli_fetch_assoc($result_evenements);
 if (!$result_evenements) {
     die("Erreur lors de l'exécution de la requête : " . mysqli_error($conn));
 }
-// Récupérer les infos sur le lieu
+// Récupérer données lieu 
 $idLieu = $evenements['idLieu'];
 $sqlLieu = "SELECT * FROM lieu WHERE idLieu = '$idLieu'";
 $resultLieu = mysqli_query($conn, $sqlLieu);
@@ -39,7 +36,7 @@ if ($resultLieu && mysqli_num_rows($resultLieu) > 0) {
     echo "<td>N/A</td>";
 }
 
-// Récupérer les infos sur les donneurs
+// Récupérer les données donneurs 
 $sqldonneur = "SELECT donneur.*
 FROM donneur
 INNER JOIN participationdonneur ON donneur.idDonneur = participationdonneur.idDonneur
@@ -61,11 +58,8 @@ $nb_donneur = mysqli_fetch_assoc($result_nb_donneur);
 if (!$result_nb_donneur) {
     die("Erreur lors de l'exécution de la requête : " . mysqli_error($conn));
 }
-
 mysqli_close($conn);
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -88,7 +82,6 @@ mysqli_close($conn);
             <a href="javascript:history.go(-1);">Retour</a>
         </nav>
         <div class="men">
-        
         </div>
     </header>
     <section class="principale">
@@ -108,10 +101,6 @@ mysqli_close($conn);
                         <td><?php echo $lieu['lieu']; ?></td>
                     </tr>
                 </table>
-
-                
-
-
             </div>
         </div>
     </section>
@@ -121,7 +110,6 @@ mysqli_close($conn);
             <div class="ent">
                 <div>
                     <h3><Strong>Dons :</Strong> <?php echo $nb_donneur['nb_donneur']; ?> donneurs</h3>
-                    
                 </div>
                 <div class="div">
                     <a href="form_donneur_page.php">
@@ -150,13 +138,10 @@ mysqli_close($conn);
                         echo "</tr>";
                     }
                     ?>
-
             </table>
         </div>
     </div>
 </section>
-
-    
 </div>
 </body>
 </html>

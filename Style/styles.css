@@ -41,17 +41,14 @@ body{
   color: white;
   text-decoration: none;
 }
-
 .header .logo {
   color: white;
   font-size: 2rem;
   font-weight: bold;
 }
-
 .header .navbar {
   margin-left: 200px;
 }
-
 .principale {
     margin-top: 45px;
     max-width: 1000px;
@@ -66,7 +63,6 @@ body{
     text-align: center;
     margin-bottom: 20px;
 }
-
 .dashboard-heading  {
     font-size: 24px;
     font-size: 1.5em;
@@ -75,37 +71,28 @@ body{
     margin-top: 40px;
     margin-bottom: 20px;
 }
-
-
 .dashboard-content table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 0px;
 }
-
 .dashboard-content table th,
 .dashboard-content table td {
     padding: 8px;
     border: 1px solid #ccc;
     text-align: left;
 }
-
 .dashboard-content table th {
     background-color: #f0f0f0;
     font-weight: bold;
 }
-
 .dashboard-content table td {
     background-color: #fff;
 }
-
-
-
 #openPopup {
   padding: 10px 20px;
   font-size: 16px;
 }
-
 .popup {
   display: none;
   position: fixed;
@@ -118,7 +105,6 @@ body{
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
 }
-
 .popup-content {
   background-color: #fefefe;
   margin: 15% auto;
@@ -127,7 +113,6 @@ body{
   width: 80%;
   max-width: 400px;
 }
-
 .close {
   color: #aaa;
   float: right;
@@ -135,14 +120,12 @@ body{
   font-weight: bold;
   margin-left: 10px;
 }
-
 .close:hover,
 .close:focus {
   color: #DF3131;
   text-decoration: none;
   cursor: pointer;
 }
-
 .container {
   padding: 70px;
   background-color: white;
@@ -153,16 +136,13 @@ body{
   flex-direction: column;
   align-items: center;
 }
-
 h1 {
   color: #DF3131;
 }
-
 .input-container {
   position: relative;
   margin-bottom: 20px;
 }
-
 label {
   position: absolute;
   left: 10px;
@@ -171,28 +151,23 @@ label {
   pointer-events: none;
   transition: 0.3s;
 }
-
 input:focus+label,
 input:valid+label {
   top: -10px;
   font-size: 12px;
   color: blue;
 }
-
 input {
   width: 100%;
   padding: 12px;
   font-size: 16px;
 }
-
 input:focus {
   outline: none;
   border: 1px solid blue;
 }
-
 .input-container input[type="password"] {
   padding-right: 10px;
-  /* Ajoutez un espace pour l'icône */
 }
 
 .input-container .eye-icon {

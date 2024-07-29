@@ -85,7 +85,7 @@ if (!isset($_GET['acces'])) {
             echo "<td>" . $donnees["tel"] . "</td>";
             echo "<td>" . $donnees["email"] . "</td>";
             echo "<td>" . $donnees["Poste"] . "</td>";
-            echo "<td>
+           /* echo "<td>
                     <form action='form_add_employer.php?id=" . $id . "' method='post'>
                         <input class='btn btn-danger' type='submit' value='Edit' name='modifier'/>
                     </form>
@@ -95,7 +95,7 @@ if (!isset($_GET['acces'])) {
                         <input class='btn btn-primary' type='submit' value='Delete' name='supprimer'/>
                     </form>
                 </td>";
-            echo '</tr>';
+            echo '</tr>';*/
         }
         ?>
         </tbody>
