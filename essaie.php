@@ -1,5 +1,6 @@
 <?php
-function formatData($collation, $usager) {
+function formatData($collation, $usager)
+{
     // Formater les sections Collation et Usager
     $collationFormatted = "Collation[Boisson(" . $collation['boisson'] . ")|Biscuits(" . $collation['biscuits'] . ")]";
     $usagerFormatted = "Usager[PocheDeSang(" . $usager['pocheDeSang'] . ")]";
@@ -33,4 +34,3 @@ if ($statement->execute()) {
 } else {
     echo "Erreur lors de l'enregistrement";
 }
-?>

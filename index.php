@@ -8,7 +8,7 @@ if (isset($_POST['submit'])) {
     $password = $_POST['password'];
     $idService = $_POST['idService'];
     $page_redirect = $_POST['page_redirect'];
-    // Valider les données reçues (optionnel: éviter les injections SQL)
+    // Valider les données reçues
     $email = mysqli_real_escape_string($conn, $email);
     $password = mysqli_real_escape_string($conn, $password);
     // Requête pour vérifier l'utilisateur
@@ -24,10 +24,10 @@ if (isset($_POST['submit'])) {
         $badge = $utilisateur['Badge'];
         if ($badge == 'Administrateur') {
             // Rediriger l'administrateur vers la page correspondante
-            if ($page_redirect==="utilisateur") {
+            if ($page_redirect === "utilisateur") {
                 header("Location: form_add_user.php?acces");
                 exit();
-            }else{
+            } else {
                 header("Location: form_employer.php?acces");
                 exit();
             }
@@ -94,11 +94,13 @@ mysqli_close($conn);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tableau de bord</title>
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link rel="stylesheet" href=".\Style\styles.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+
 </head>
+
 <body>
     <div class=" ">
         <header class="header" id="header">
@@ -117,7 +119,7 @@ mysqli_close($conn);
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">Evenement</a>
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">Admin</a>
                         <ul class="dropdown-menu" style="">
                             <li><a class="dropdown-item" id="openPopupEmployer" style="color:black;">Employer</a></li>
                             <li>
@@ -221,4 +223,5 @@ mysqli_close($conn);
         }
     </script>
 </body>
+
 </html>

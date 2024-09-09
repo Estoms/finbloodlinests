@@ -40,10 +40,10 @@ if (isset($_POST['search'])) {
     $search = $_POST['search'];
 
     // Requête pour rechercher les événements par date ou par nom
-    $sqlEvenements = "SELECT * FROM evenement WHERE idService = '$idService' AND (nomEvenement LIKE '%$search%' OR dateEvenement = '$search') AND isActive = 1";
+    $sqlEvenements = "SELECT * FROM evenement WHERE idService = '$idService' AND (nomEvenement LIKE '%$search%' OR dateEvenement = '$search')";
 } else {
     // Récupérer tous les événements de l'organisme
-    $sqlEvenements = "SELECT * FROM evenement WHERE idService = '$idService'  AND isActive = 1 ORDER BY dateEvenement DESC";
+    $sqlEvenements = "SELECT * FROM evenement WHERE idService = 'STS-DDS-ATL' ORDER BY dateEvenement DESC ";
 }
 
 $resultEvenements = mysqli_query($conn, $sqlEvenements);
@@ -69,9 +69,9 @@ if (!$resultEvenements) {
 
     <div class="menu" >
         <ul>
-            <li><a href="formulaire_evenement.page.php">Créer évènement</a></li>
-            <li><a href="all_dons.php">Don_Réaliser</a></li>
             <li><a href="javascript:history.go(-1);">Retour</a></li>
+            <li><a href="javascript:history.go(-1);"></a></li>
+            <li><a href="javascript:history.go(-1);"></a></li>
         </ul>
     </div>
 
@@ -79,7 +79,7 @@ if (!$resultEvenements) {
     <div class="dashboard-content">
 
         <form class="search-form" method="POST" action="">
-            <input type="text"  name="search" placeholder="Rechercher par nom ou date">
+            <input type="text" name="search" placeholder="Rechercher par nom ou date">
             <input type="submit" value="Rechercher">
         </form>
 
@@ -117,7 +117,6 @@ if (!$resultEvenements) {
                 echo "<div class='lien'>";
                 echo "<a href='info_event.php?id=".$evenement['idEvenement']."'><button>!</button></a>";
                 echo "<a href='gestE_S.php?id=".$evenement['idEvenement']."'><button><strong>PF</strong></button></a>";
-                echo "<a href='form_don_page.php?id=".$evenement['idEvenement']."'><button><strong>></strong></button></a>";
                 echo "</div>";
                 echo "</td>";
                 echo "</tr>"; 

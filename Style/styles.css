@@ -195,6 +195,10 @@ input[type="submit"] {
   color: #DF3131;
 }
 
+#dropdown-item{
+  cursor: pointer;
+}
+
 @media screen and (max-width: 768px) {
   .container {
       width: 90%;
