@@ -2,9 +2,9 @@
 session_start();
 
 $servername = "localhost";
-$username = "id20719702_sts";
+$username = "4527705_sts";
 $password = "GestSTS001@";
-$dbname = "id20719702_sts";
+$dbname = "4527705_sts";
 
 // Création d'une nouvelle connexion
 $conn = mysqli_init();

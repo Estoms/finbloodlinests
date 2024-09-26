@@ -14,9 +14,10 @@ if (isset($_POST['submit'])) {
     // Requête pour vérifier l'utilisateur
     $sql = "SELECT * FROM utilisateur WHERE email='$email' AND motDePasse='$password'";
     $result = mysqli_query($conn, $sql);
+    echo mysqli_num_rows($result);
     if (!$result) {
         die("Erreur lors de l'exécution de la requête : " . mysqli_error($conn));
-    }
+    }  
     // Vérifier s'il y a une correspondance d'utilisateur
     if (mysqli_num_rows($result) == 1) {
         // Utilisateur trouvé, vérifier le badge
@@ -31,12 +32,19 @@ if (isset($_POST['submit'])) {
                 header("Location: form_employer.php?acces");
                 exit();
             }
-        } else {
+        } 
+        else if(mysqli_num_rows($result) == 0) {
+            echo "<script>
+            alert(' Aucun utilisateur n'a été trouvé');
+          </script>";
+        }
+        else {
             echo "<script>
             alert('Accès refusé');
           </script>";
         }
-    } else {
+    } 
+    else {
         echo "<script>
             alert('Email ou mot de passe incorrect.');
           </script>";
