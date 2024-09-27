@@ -84,45 +84,73 @@ if (!$resultEvenements) {
         </form>
 
         <table>
-            <tr>
-                <th>Nom</th>
-                <th>Date</th>
-                <th>Heure de début</th>
-                <th>Heure de fin</th>
-                <th>Description</th>
-                <th>Lieu</th>
-                <th style="text-align: center;">Actions</th>
-            </tr>
-            <?php
-            while ($evenement = mysqli_fetch_assoc($resultEvenements)) {
-                echo "<tr>";
-                echo "<td>".$evenement['nomEvenement']."</td>";
-                echo "<td>".$evenement['dateEvenement']."</td>";
-                echo "<td>".$evenement['heureDebut']."</td>";
-                echo "<td>".$evenement['heureFin']."</td>";
-                echo "<td>".$evenement['Description']."</td>";
+    <tr>
+        <th>Nom</th>
+        <th>Date</th>
+        <th>Heure de début</th>
+        <th>Heure de fin</th>
+        <th>Description</th>
+        <th>Lieu</th>
+        <th style="text-align: center;">Actions</th>
+    </tr>
+    <?php
+    // Exemple de requête SQL avec jointure
+    $sqlEvenements = "
+        SELECT e.*, l.lieu 
+        FROM evenement e 
+        LEFT JOIN lieu l ON e.idLieu = l.idLieu 
+        WHERE e.idService = ? AND e.isActive = 1 
+        ORDER BY e.dateEvenement DESC
+    ";
 
-                // Récupérer le nom du lieu de la table "Lieu" en utilisant l'idLieu
-                $idLieu = $evenement['idLieu'];
-                $sqlLieu = "SELECT lieu FROM lieu WHERE idLieu = '$idLieu'";
-                $resultLieu = mysqli_query($conn, $sqlLieu);
-                if ($resultLieu && mysqli_num_rows($resultLieu) > 0) {
-                    $lieu = mysqli_fetch_assoc($resultLieu);
-                    echo "<td>".$lieu['lieu']."</td>";
-                } else {
-                    echo "<td>N/A</td>";
-                }
+    // Préparer et exécuter la requête
+    $stmt = mysqli_prepare($conn, $sqlEvenements);
+    mysqli_stmt_bind_param($stmt, "i", $idService);
+    mysqli_stmt_execute($stmt);
+    $resultEvenements = mysqli_stmt_get_result($stmt);
 
-                echo "<td>";
-                echo "<div class='lien'>";
-                echo "<a href='info_event.php?id=".$evenement['idEvenement']."'><button>!</button></a>";
-                echo "<a href='gestE_S.php?id=".$evenement['idEvenement']."'><button><strong>PF</strong></button></a>";
-                echo "</div>";
-                echo "</td>";
-                echo "</tr>"; 
-            }
-            ?>
-        </table>
+    // Tableau associatif pour regrouper les événements par mois
+    $evenementsParMois = [];
+
+    while ($evenement = mysqli_fetch_assoc($resultEvenements)) {
+        // Extraire le mois et l'année de la date
+        $dateEvenement = new DateTime($evenement['dateEvenement']);
+        $mois = $dateEvenement->format('F Y'); // 'F' pour le nom complet du mois et 'Y' pour l'année
+
+        // Regrouper les événements par mois
+        if (!isset($evenementsParMois[$mois])) {
+            $evenementsParMois[$mois] = [];
+        }
+        $evenementsParMois[$mois][] = $evenement;
+    }
+
+    // Afficher les événements regroupés par mois
+    foreach ($evenementsParMois as $mois => $evenements) {
+        echo "<tr><td colspan='7'><strong>$mois</strong></td></tr>"; // Afficher le mois
+        foreach ($evenements as $evenement) {
+            echo "<tr>";
+            echo "<td>".$evenement['nomEvenement']."</td>";
+            echo "<td>".$evenement['dateEvenement']."</td>";
+            echo "<td>".$evenement['heureDebut']."</td>";
+            echo "<td>".$evenement['heureFin']."</td>";
+            echo "<td>".$evenement['Description']."</td>";
+            
+            // Afficher le lieu, qui est maintenant inclus dans la requête
+            echo "<td>".(!empty($evenement['lieu']) ? $evenement['lieu'] : "N/A")."</td>";
+
+            echo "<td>";
+            echo "<div class='lien'>";
+            echo "<a href='info_event.php?id=".$evenement['idEvenement']."'><button>!</button></a>";
+            echo "<a href='gestE_S.php?id=".$evenement['idEvenement']."'><button><strong>PF</strong></button></a>";
+            echo "<a href='form_don_page.php?id=" . $evenement['idEvenement'] . "'><button><strong>></strong></button></a>";
+            echo "</div>";
+            echo "</td>";
+            echo "</tr>"; 
+        }
+    }
+    ?>
+</table>
+
     </div>
 </div>
 </body>

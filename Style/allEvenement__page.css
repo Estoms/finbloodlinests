@@ -6,7 +6,7 @@ body {
 
 /* Container Styles */
 .container {
-    max-width: 1000px;
+    max-width: 90%;
     margin: 100px auto 0;
     padding: 40px;
     background-color: #fff;
@@ -99,6 +99,7 @@ body {
 .lien {
     display: flex;
     gap: 10px;
+    justify-content: center;
 }
 .lien button {
     background-color: #DF3131;
@@ -114,6 +115,9 @@ body {
 }
 .lien a {
     text-decoration: none;
+}
+.lien button:hover {
+    background-color: #af0000;
 }
 /* Responsive Styles */
 @media screen and (max-width: 600px) {
