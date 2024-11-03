@@ -7,10 +7,10 @@
   text-decoration: none;
 }
 body{
-  background: linear-gradient(to bottom, #841c1c, #ec5c5c);
-  margin: 0;
-  padding: 0;
-  height: 100vh;
+    background: linear-gradient(to bottom, #841c1c, #ec5c5c);
+    margin: 0;
+    padding: 0;
+    height: 100vh;
 }
 .header {
   top: 0;

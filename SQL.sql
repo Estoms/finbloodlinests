@@ -6,7 +6,6 @@ CREATE TABLE IF NOT EXISTS `lieu` (
 )
 
 
-
 CREATE TABLE questions (
     idQuestion INT AUTO_INCREMENT PRIMARY KEY,
     question_text TEXT NOT NULL,
@@ -49,7 +48,6 @@ CREATE TABLE IF NOT EXISTS `employer` (
 )
 
 
-
 CREATE TABLE IF NOT EXISTS `evenement` (
   `idEvenement` int NOT NULL AUTO_INCREMENT,
   `nomEvenement` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -64,7 +62,6 @@ CREATE TABLE IF NOT EXISTS `evenement` (
   KEY `idLieu` (`idLieu`),
   KEY `idService` (`idService`)
 ) 
-
 
 
 CREATE TABLE `donneur` (
@@ -122,7 +119,6 @@ END//
 DELIMITER ;
 
 
-
 CREATE TABLE IF NOT EXISTS `participation` (
   `idParticipation` int NOT NULL,
   `participantNom` varchar(255)  DEFAULT NULL,
@@ -142,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `participationdonneur` (
   PRIMARY KEY (`idDonneur`,`idEvenement`),
   KEY `idEvenement` (`idEvenement`)
   KEY `idDonneur` (`idDonneur`)
-) 
+)
 
 CREATE TABLE IF NOT EXISTS `reponsedonneur` (
   `idReponse` int NOT NULL AUTO_INCREMENT,
@@ -154,8 +150,6 @@ CREATE TABLE IF NOT EXISTS `reponsedonneur` (
   KEY `idDonneur` (`idDonneur`,`idEvenement`),
   KEY `idQuestion` (`idQuestion`)
 )
-
-
 
 
 
@@ -175,7 +169,6 @@ ALTER TABLE `reponsedonneur`
 ALTER TABLE `participationdonneur`
   ADD CONSTRAINT `ParticipationDonneur_ibfk_1` FOREIGN KEY (`idDonneur`) REFERENCES `donneur` (`idDonneur`),
   ADD CONSTRAINT `ParticipationDonneur_ibfk_2` FOREIGN KEY (`idEvenement`) REFERENCES `evenement` (`idEvenement`);
-
 
 
 -- Insertion de dix lieux fictifs dans le département de l'Atlantique
@@ -360,7 +353,6 @@ INSERT INTO questions (idQuestion, question_text, response_type) VALUES
     $dbname = "id20719702_gestiondon";
 
 
-
 all_evenement.page.php
 connexion.php
 connexionOrganisme.php
@@ -375,7 +367,6 @@ info_event.php
 session.php
 styles.css
 traitement_donneur_reponse.php
-
 
 
 all_evenement.page.css

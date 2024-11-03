@@ -45,13 +45,14 @@ if (!$result_donneur) {
     die("Erreur lors de l'exécution de la requête : " . mysqli_error($conn));
 }
 
-$sql_nb_donneur = "SELECT COUNT(DISTINCT donneur.idDonneur) as nb_donneur
+//statistique tableau 1
+$sql_nb_donneur = "SELECT donneur.*
 FROM donneur
 INNER JOIN participationdonneur ON donneur.idDonneur = participationdonneur.idDonneur
-WHERE participationdonneur.idEvenement = '$idEvenement';
+WHERE participationdonneur.idEvenement = '$idEvenement'
+GROUP BY donneur.idDonneur;
 ";
 $result_nb_donneur = mysqli_query($conn, $sql_nb_donneur);
-$nb_donneur = mysqli_fetch_assoc($result_nb_donneur);
 if (!$result_nb_donneur) {
     die("Erreur lors de l'exécution de la requête : " . mysqli_error($conn));
 }
@@ -63,9 +64,9 @@ $tranche_31_44 = 0;
 $tranche_45_plus = 0;
 
 // Parcourir les résultats et compter les donneurs par tranche d'âge
-while ($row = mysqli_fetch_assoc($result_donneur)) {
+while ($row = mysqli_fetch_assoc($result_nb_donneur)) {
     $age = $row['ageDonneur'];
-    
+
     if ($age >= 18 && $age <= 24) {
         $tranche_18_24++;
     } elseif ($age >= 25 && $age <= 30) {
@@ -79,7 +80,56 @@ while ($row = mysqli_fetch_assoc($result_donneur)) {
 
 // Calculer le total
 $total_poches = $tranche_18_24 + $tranche_25_30 + $tranche_31_44 + $tranche_45_plus;
+//statistique tableau 1
 
+//statistique tableau 2
+// Récupérer le nombre total de donneurs par sexe pour l'événement
+$sql_total_donneurs = "SELECT donneur.sexe, COUNT(DISTINCT donneur.idDonneur) as nb_total
+FROM donneur
+INNER JOIN participationdonneur ON donneur.idDonneur = participationdonneur.idDonneur
+WHERE participationdonneur.idEvenement = '$idEvenement'
+GROUP BY donneur.sexe";
+$result_total_donneurs = mysqli_query($conn, $sql_total_donneurs);
+
+// Initialisation des variables
+$total_hommes = 0;
+$total_femmes = 0;
+
+while ($row = mysqli_fetch_assoc($result_total_donneurs)) {
+    if ($row['sexe'] == 'Homme') {
+        $total_hommes = $row['nb_total'];
+    } elseif ($row['sexe'] == 'Femme') {
+        $total_femmes = $row['nb_total'];
+    }
+}
+
+// Récupérer les anciens donneurs pour l'événement donné (basé sur idQuestion et réponse non nulle)
+$sql_anciens = "SELECT donneur.sexe, COUNT(DISTINCT donneur.idDonneur) as nb_anciens
+FROM donneur
+INNER JOIN participationdonneur ON donneur.idDonneur = participationdonneur.idDonneur
+WHERE participationdonneur.idEvenement = '$idEvenement'
+AND participationdonneur.idQuestion = 'question1'
+AND participationdonneur.reponse ='OUI'
+GROUP BY donneur.sexe";
+$result_anciens = mysqli_query($conn, $sql_anciens);
+
+// Initialisation des variables pour anciens donneurs
+$anciens_hommes = 0;
+$anciens_femmes = 0;
+
+while ($row = mysqli_fetch_assoc($result_anciens)) {
+    if ($row['sexe'] == 'Homme') {
+        $anciens_hommes = $row['nb_anciens'];
+    } elseif ($row['sexe'] == 'Femme') {
+        $anciens_femmes = $row['nb_anciens'];
+    }
+}
+
+// Calculer les nouveaux donneurs en soustrayant les anciens des totaux
+$nouveaux_hommes = $total_hommes - $anciens_hommes;
+$nouveaux_femmes = $total_femmes - $anciens_femmes;
+
+//statistique tableau 2
 
 mysqli_close($conn);
 ?>
@@ -126,42 +176,115 @@ mysqli_close($conn);
                         </tr>
                     </table> <br>
                     <div class="div">
-                        <a href="form_donneur_page.php">
-                            <button>Statistique</button>
-                        </a>
+                        <button id="showStatsBtn">Statistique</button>
                     </div> <br>
-                    <div>
-                    <!-- affichage du tableau des tranches d'âches -->
-                    <table border="1">
-                            <thead>
-                                <tr>
-                                    <th>Tranche d'Âge</th>
-                                    <th>Nombre de Poche</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>18 - 24 Ans</td>
-                                    <td><?php echo $tranche_18_24; ?></td>
-                                </tr>
-                                <tr>
-                                    <td>25 - 30 Ans</td>
-                                    <td><?php echo $tranche_25_30; ?></td>
-                                </tr>
-                                <tr>
-                                    <td>31 - 44 Ans</td>
-                                    <td><?php echo $tranche_31_44; ?></td>
-                                </tr>
-                                <tr>
-                                    <td>45 Ans et plus</td>
-                                    <td><?php echo $tranche_45_plus; ?></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Total</strong></td>
-                                    <td><strong><?php echo $total_poches; ?></strong></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div id="statistique" style="display: none;">
+                        <div>
+                            <!-- affichage du tableau des tranches d'âches -->
+                            <table border="1">
+                                <thead>
+                                    <tr>
+                                        <th>Tranche d'Âge</th>
+                                        <th>Nombre de Poche</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>18 - 24 Ans</td>
+                                        <td><?php echo $tranche_18_24; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>25 - 30 Ans</td>
+                                        <td><?php echo $tranche_25_30; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>31 - 44 Ans</td>
+                                        <td><?php echo $tranche_31_44; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>45 Ans et plus</td>
+                                        <td><?php echo $tranche_45_plus; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Total</strong></td>
+                                        <td><strong><?php echo $total_poches; ?></strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br>
+                        <div>
+                            <table border="1" cellspacing="0" cellpadding="5">
+                                <thead>
+                                    <tr>
+                                        <th>PRELEVEMENT</th>
+                                        <th>SEXE</th>
+                                        <th>Ancien Donneur</th>
+                                        <th>Nouveau Donneur</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td rowspan="3">Nombre de donneur reçus</td>
+                                        <td>Masculin</td>
+                                        <td><?php echo $anciens_hommes; ?></td>
+                                        <td><?php echo $nouveaux_hommes; ?></td>
+                                        <td><?php echo $total_hommes; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Féminin</td>
+                                        <td><?php echo $anciens_femmes; ?></td>
+                                        <td><?php echo $nouveaux_femmes; ?></td>
+                                        <td><?php echo $total_femmes; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total</td>
+                                        <td><?php echo $anciens_hommes + $anciens_femmes; ?></td>
+                                        <td><?php echo $nouveaux_hommes + $nouveaux_femmes; ?></td>
+                                        <td><?php echo $total_hommes + $total_femmes; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="3">Nombre de donneur Refusés</td>
+                                        <td>Masculin</td>
+                                        <td><?php echo "0"; ?></td>
+                                        <td><?php echo "0"; ?></td>
+                                        <td><?php echo "0"; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Féminin</td>
+                                        <td><?php echo "0"; ?></td>
+                                        <td><?php echo "0"; ?></td>
+                                        <td><?php echo "0"; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total</td>
+                                        <td><?php echo "0"; ?></td>
+                                        <td><?php echo "0"; ?></td>
+                                        <td><?php echo "0"; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="3">Nombre de donneur prelevés</td>
+                                        <td>Masculin</td>
+                                        <td><?php echo $anciens_hommes; ?></td>
+                                        <td><?php echo $nouveaux_hommes; ?></td>
+                                        <td><?php echo $total_hommes; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Féminin</td>
+                                        <td><?php echo $anciens_femmes; ?></td>
+                                        <td><?php echo $nouveaux_femmes; ?></td>
+                                        <td><?php echo $total_femmes; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total</td>
+                                        <td><?php echo $anciens_hommes + $anciens_femmes; ?></td>
+                                        <td><?php echo $nouveaux_hommes + $nouveaux_femmes; ?></td>
+                                        <td><?php echo $total_hommes + $total_femmes; ?></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -209,5 +332,15 @@ mysqli_close($conn);
         </section>
     </div>
 </body>
+<script>
+    document.getElementById("showStatsBtn").addEventListener("click", function() {
+        var statsDiv = document.getElementById("statistique");
+        if (statsDiv.style.display === "none") {
+            statsDiv.style.display = "block";
+        } else {
+            statsDiv.style.display = "none";
+        }
+    });
+</script>
 
 </html>

